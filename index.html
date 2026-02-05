@@ -5,428 +5,599 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
   <title>DeepDynamics Lab — Machine Learning × Dynamical Systems</title>
-  <meta name="description" content="DeepDynamics Lab: research at the intersection of machine learning, dynamical systems, and geometry-aware time-series intelligence." />
+  <meta name="description" content="DeepDynamics Lab (PI: Dr. Pradeep Singh) — neuroscience- and geometry-inspired machine learning for dynamical systems, time-series, and reservoir computing." />
+
+  <!-- Elegant inline favicon (no external files) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3CradialGradient id='g' cx='32%25' cy='28%25'%3E%3Cstop offset='0' stop-color='%2381a9ff'/%3E%3Cstop offset='1' stop-color='%2310192a'/%3E%3C/radialGradient%3E%3ClinearGradient id='h' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2368f0c8'/%3E%3Cstop offset='1' stop-color='%2381a9ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='128' height='128' rx='28' fill='url(%23g)'/%3E%3Cpath d='M26 86c14-22 26-32 38-32s24 10 38 32' fill='none' stroke='url(%23h)' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M26 46c14 22 26 32 38 32s24-10 38-32' fill='none' stroke='rgba(255,255,255,.22)' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E" />
+
   <style>
     :root{
-      --bg:#0b0f17; --panel:#0f1624; --text:#e8eefc; --muted:#a8b3cf;
-      --line:rgba(255,255,255,.10); --accent:#7aa6ff; --accent2:#6ee7b7;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      /* Professional palette: deep navy + teal + periwinkle */
+      --bg: #070a12;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.045);
+      --line: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --soft: rgba(255,255,255,0.80);
+
+      --a: #7aa6ff;   /* periwinkle */
+      --b: #62f0c8;   /* teal */
+      --c: #f0d37a;   /* warm accent */
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.40);
+      --shadow2: 0 10px 28px rgba(0,0,0,0.28);
+
       --max: 1120px;
-      --radius: 18px;
-      --pad: 18px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --r: 18px;
+
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
     }
+
     @media (prefers-color-scheme: light){
       :root{
-        --bg:#fbfcff; --panel:#ffffff; --text:#0b1220; --muted:#4b5563;
-        --line:rgba(15,23,42,.12); --accent:#1d4ed8; --accent2:#047857;
-        --shadow: 0 10px 24px rgba(15,23,42,.08);
+        --bg: #fbfcff;
+        --panel: rgba(10,18,32,0.045);
+        --panel2: rgba(10,18,32,0.035);
+        --line: rgba(10,18,32,0.10);
+        --text: rgba(10,18,32,0.92);
+        --muted: rgba(10,18,32,0.64);
+        --soft: rgba(10,18,32,0.84);
+
+        --shadow: 0 16px 44px rgba(10,18,32,0.12);
+        --shadow2: 0 10px 26px rgba(10,18,32,0.10);
       }
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:var(--font);
+      font-family: var(--sans);
+      color: var(--text);
       background:
-        radial-gradient(1200px 500px at 15% -10%, rgba(122,166,255,.25), transparent 55%),
-        radial-gradient(900px 500px at 85% 0%, rgba(110,231,183,.18), transparent 60%),
-        radial-gradient(900px 500px at 40% 110%, rgba(122,166,255,.10), transparent 60%),
+        radial-gradient(1100px 520px at 14% -12%, color-mix(in srgb, var(--a) 35%, transparent), transparent 60%),
+        radial-gradient(920px 520px at 88% -10%, color-mix(in srgb, var(--b) 22%, transparent), transparent 58%),
+        radial-gradient(1000px 520px at 45% 115%, color-mix(in srgb, var(--a) 16%, transparent), transparent 60%),
         var(--bg);
-      color:var(--text);
-      line-height:1.55;
+      line-height: 1.55;
     }
-    a{color:inherit; text-decoration:none}
-    a:hover{color:var(--accent)}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ color: var(--a); }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 60px; }
+
+    /* Top bar */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(150%) blur(10px);
-      background: color-mix(in srgb, var(--bg) 70%, transparent);
-      border-bottom:1px solid var(--line);
-      padding:14px 18px;
-      margin:0 -18px 22px;
+      position: sticky; top: 0; z-index: 20;
+      margin: 0 -18px 18px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: saturate(140%) blur(12px);
+      background: color-mix(in srgb, var(--bg) 76%, transparent);
+      display:flex; align-items:center; justify-content:space-between; gap: 14px;
     }
-    .brand{display:flex; align-items:center; gap:12px}
+    .brand{ display:flex; align-items:center; gap:12px; min-width: 240px; }
     .mark{
-      width:36px; height:36px; border-radius:12px;
+      width: 38px; height: 38px; border-radius: 14px;
       background:
-        radial-gradient(circle at 30% 30%, rgba(122,166,255,.95), rgba(122,166,255,.25) 55%, transparent 70%),
-        radial-gradient(circle at 70% 65%, rgba(110,231,183,.85), rgba(110,231,183,.15) 50%, transparent 70%),
-        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,0));
-      border:1px solid var(--line);
-      box-shadow: var(--shadow);
+        radial-gradient(circle at 30% 28%, color-mix(in srgb, var(--a) 95%, transparent), transparent 58%),
+        radial-gradient(circle at 70% 68%, color-mix(in srgb, var(--b) 70%, transparent), transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
     }
-    .brand h1{font-size:15px; margin:0; letter-spacing:.2px}
-    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:1px}
-    nav{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
+    .brand .t{ display:flex; flex-direction:column; gap:1px; }
+    .brand .t b{ font-size: 14px; letter-spacing: .2px; }
+    .brand .t span{ font-size: 12px; color: var(--muted); }
+
+    nav{ display:flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
     nav a{
-      font-size:13px; color:var(--muted);
-      padding:8px 10px; border-radius:12px;
-      border:1px solid transparent;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
     }
     nav a:hover{
-      border-color:var(--line);
+      border-color: var(--line);
       background: color-mix(in srgb, var(--panel) 85%, transparent);
+      color: var(--soft);
     }
 
-    .hero{
-      display:grid; grid-template-columns: 1.2fr .8fr;
-      gap:18px; align-items:stretch;
-    }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+    /* Cards / layout */
+    .grid{ display:grid; gap: 16px; }
+    .hero{ grid-template-columns: 1.35fr .85fr; align-items: stretch; }
+    @media (max-width: 920px){ .hero{ grid-template-columns: 1fr; } }
 
     .card{
+      border: 1px solid var(--line);
+      border-radius: var(--r);
       background: color-mix(in srgb, var(--panel) 92%, transparent);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 22px;
     }
-    .headline{
-      font-size:40px; line-height:1.05; margin:6px 0 10px;
-      letter-spacing:-.6px;
-    }
-    .subhead{color:var(--muted); font-size:16px; margin:0 0 16px}
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
-    .chip{
-      font-size:12px; color:var(--muted);
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--panel) 85%, transparent);
-      padding:7px 10px; border-radius:999px;
-    }
-    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--panel) 86%, transparent);
-      font-size:13px; color:var(--text);
-    }
-    .btn strong{font-weight:650}
-    .btn.primary{
-      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-      background: linear-gradient(135deg,
-        color-mix(in srgb, var(--accent) 25%, var(--panel)),
-        color-mix(in srgb, var(--accent2) 18%, var(--panel))
-      );
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btn:active{transform: translateY(0px)}
-    .meta{
-      display:grid; gap:10px;
-    }
-    .kv{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
-      background: color-mix(in srgb, var(--panel) 88%, transparent);
-    }
-    .kv .k{font-size:12px; color:var(--muted); margin-bottom:4px}
-    .kv .v{font-size:14px}
-    .kv .v code{font-family:var(--mono); font-size:13px; color:var(--muted)}
-    .divider{height:1px; background:var(--line); margin:18px 0}
-
-    .grid{
-      display:grid; grid-template-columns: repeat(12, 1fr);
-      gap:16px; margin-top:18px;
-    }
-    .span6{grid-column: span 6;}
-    .span4{grid-column: span 4;}
-    .span8{grid-column: span 8;}
-    .span12{grid-column: span 12;}
-    @media (max-width: 900px){
-      .span6,.span4,.span8{grid-column: span 12;}
+    .card.soft{
+      background: color-mix(in srgb, var(--panel2) 92%, transparent);
+      box-shadow: none;
     }
 
-    h2{margin:0 0 10px; font-size:16px; letter-spacing:.2px}
-    p{margin:0 0 10px; color: color-mix(in srgb, var(--text) 90%, var(--muted))}
-    ul{margin:10px 0 0; padding-left:18px; color: color-mix(in srgb, var(--text) 88%, var(--muted))}
-    li{margin:6px 0}
-    .muted{color:var(--muted)}
-    .mini{font-size:12px; color:var(--muted)}
-    .foot{
-      margin-top:28px; padding-top:18px; border-top:1px solid var(--line);
-      display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-      color:var(--muted); font-size:12px;
-    }
-    .linkrow{display:flex; gap:10px; flex-wrap:wrap}
-    .pill{
-      padding:7px 10px; border-radius:999px;
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--panel) 90%, transparent);
-      font-size:12px;
-    }
-    .pill:hover{border-color: color-mix(in srgb, var(--accent) 55%, var(--line))}
-    .note{
-      border-left:3px solid color-mix(in srgb, var(--accent) 70%, var(--line));
-      padding-left:12px;
+    .kicker{
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size:13px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 99px;
+      background: linear-gradient(135deg, var(--b), var(--a));
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--a) 12%, transparent);
+    }
+
+    h1{
+      font-family: var(--serif);
+      font-weight: 700;
+      letter-spacing: -0.7px;
+      line-height: 1.06;
+      font-size: 44px;
+      margin: 10px 0 10px;
+    }
+    @media (max-width: 520px){ h1{ font-size: 38px; } }
+
+    .subtitle{
+      margin: 0 0 16px;
+      color: var(--soft);
+      font-size: 16px;
+    }
+    .subtitle em{ font-style: normal; color: var(--a); }
+    .lead{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .actions{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .btn{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      font-size: 13px;
+      color: var(--soft);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--a) 45%, var(--line));
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      color: var(--text);
+    }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--a) 55%, var(--line));
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--a) 22%, var(--panel)),
+          color-mix(in srgb, var(--b) 16%, var(--panel))
+        );
+    }
+    .btn .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pillrow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
+    .pill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 92%, transparent);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+
+    .mini{ font-size: 12px; color: var(--muted); }
+    .rule{ height:1px; background: var(--line); margin: 16px 0; }
+
+    /* Section headers */
+    .section{ margin-top: 16px; }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .section p{ margin: 0 0 10px; color: var(--muted); }
+
+    /* Two-column content grid */
+    .two{ grid-template-columns: 1fr 1fr; }
+    @media (max-width: 920px){ .two{ grid-template-columns: 1fr; } }
+
+    /* Lists */
+    ul.clean{ list-style: none; padding: 0; margin: 0; display:grid; gap: 10px; }
+    .item{
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 92%, transparent);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .item b{ color: var(--soft); }
+    .item .meta{ margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .item .links{ margin-top: 10px; display:flex; flex-wrap:wrap; gap: 8px; }
+
+    .chiplink{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      font-size: 12px;
+      color: var(--soft);
+    }
+    .chiplink:hover{
+      border-color: color-mix(in srgb, var(--b) 40%, var(--line));
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    footer .right{ display:flex; gap: 10px; flex-wrap:wrap; }
+    .quiet{ color: var(--muted); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .btn, .chiplink{ transition:none; }
+      .btn:hover, .chiplink:hover{ transform:none; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="topbar">
+    <header class="topbar">
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1>DeepDynamics Lab</h1>
-          <small>Machine Learning × Dynamical Systems</small>
+        <div class="t">
+          <b>DeepDynamics Lab</b>
+          <span>Neuroscience & Geometry-Inspired Machine Learning</span>
         </div>
       </div>
       <nav>
+        <a href="#about">About</a>
         <a href="#research">Research</a>
+        <a href="#books">Books</a>
         <a href="#publications">Publications</a>
-        <a href="#software">Software</a>
-        <a href="#people">People</a>
+        <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
       </nav>
-    </div>
+    </header>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="grid hero" id="about">
       <div class="card">
-        <div class="mini muted">DeepDynamics Lab • Time-Series Intelligence • Geometry-Aware Learning</div>
-        <h1 class="headline">Learning from dynamics, building principled ML.</h1>
-        <p class="subhead">
-          We develop theory and methods at the intersection of <strong>machine learning</strong>,
-          <strong>dynamical systems</strong>, and <strong>geometric representations</strong>—with a focus on
-          robust prediction, controllable models, and interpretable structure in time-evolving data.
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> DeepDynamics Lab • IIIT Surat</div>
+        <h1>Deep learning through dynamics.</h1>
+        <p class="subtitle">
+          We build <em>neuroscience-grounded</em> and <em>geometry-aware</em> learning systems for dynamical signals—
+          from chaotic flows to physiological time-series—by blending rigorous theory with practical, reproducible methods.
+        </p>
+        <p class="lead">
+          Our work draws inspiration from cortical organization, thalamocortical gating, and anatomically constrained computation,
+          while leveraging hyperbolic geometry, topological structure, and operator-theoretic perspectives for stable representation learning.
         </p>
 
         <div class="actions">
-          <a class="btn primary" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">
-            <strong>GitHub</strong> <span class="muted">/deepdynamicsai</span>
-          </a>
-          <a class="btn" href="#publications">
-            <strong>Publications</strong> <span class="muted">papers & preprints</span>
-          </a>
-          <a class="btn" href="https://scholar.google.com/" target="_blank" rel="noopener">
-            <strong>Google Scholar</strong> <span class="muted">profile</span>
-          </a>
-          <a class="btn" href="cv.pdf">
-            <strong>CV</strong> <span class="muted">PDF</span>
-          </a>
+          <a class="btn primary" href="mailto:spradeep@iiitsurat.ac.in"><b>Email</b> <span class="tag">spradeep@iiitsurat.ac.in</span></a>
+          <a class="btn" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener"><b>Lab</b> <span class="tag">deepdynamicsai.github.io</span></a>
+          <a class="btn" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener"><b>Homepage</b></a>
+          <a class="btn" href="https://orcid.org/0000-0002-5372-3355" target="_blank" rel="noopener"><b>ORCID</b></a>
+          <a class="btn" href="https://www.linkedin.com/in/psiitd/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
+          <a class="btn" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener"><b>GitHub</b></a>
         </div>
 
-        <div class="chips" aria-label="Research keywords">
-          <span class="chip">Reservoir computing</span>
-          <span class="chip">Chaotic time-series forecasting</span>
-          <span class="chip">Koopman / operator learning</span>
-          <span class="chip">Geometric deep learning</span>
-          <span class="chip">Symbolic & topological methods</span>
-          <span class="chip">Robustness & generalization</span>
+        <div class="pillrow" aria-label="Key topics">
+          <span class="pill">Reservoir computing & ESNs</span>
+          <span class="pill">Neuro-inspired architectures</span>
+          <span class="pill">Hyperbolic / geometric learning</span>
+          <span class="pill">Topology-aware memory</span>
+          <span class="pill">Chaotic & physiological signals</span>
+          <span class="pill">Stability & representation geometry</span>
         </div>
 
-        <div class="divider"></div>
-        <p class="note">
-          Interested in collaboration, visiting, or student projects?
-          Please reach out—especially if you work on dynamics, ML theory, or real-world time-series.
+        <div class="rule"></div>
+        <p class="mini">
+          PI: <b>Dr. Pradeep Singh</b> • Machine Learning × Dynamical Systems •
+          <span class="quiet">IIIT Surat</span>
         </p>
       </div>
 
-      <aside class="card meta">
-        <div class="kv">
-          <div class="k">Principal Investigator</div>
-          <div class="v"><strong>Dr. Pradeep Singh</strong> <span class="muted">(Research Professor)</span></div>
-          <div class="mini">Machine Learning • Dynamical Systems • Reservoir Computing</div>
+      <aside class="card soft">
+        <div class="section">
+          <h2>Research philosophy</h2>
+          <p>
+            Modern ML becomes more reliable when it respects the structure of the world: dynamics, geometry, and biology.
+            DeepDynamics emphasizes <b>principled inductive biases</b>—neuro-anatomical constraints, symmetry, hyperbolic structure,
+            and topological memory—to improve robustness, interpretability, and long-horizon behavior.
+          </p>
         </div>
-        <div class="kv">
-          <div class="k">Core themes</div>
-          <div class="v">
-            <ul>
-              <li>Geometry-aware sequence models and operator learning</li>
-              <li>Reservoir computing beyond “random”: structure, theory, and scaling</li>
-              <li>Stability, contraction, and generalization in recurrent systems</li>
-              <li>Applications: physics-like signals, biomedical series, and complex systems</li>
-            </ul>
-          </div>
-        </div>
-        <div class="kv">
-          <div class="k">This website</div>
-          <div class="v"><code>deepdynamicsai.github.io</code></div>
-          <div class="mini">Hosted on GitHub Pages • single-file, fast, minimal</div>
+
+        <div class="rule"></div>
+
+        <div class="section">
+          <h2>Focus areas</h2>
+          <ul class="clean">
+            <li class="item">
+              <b>Neuro-inspired reservoirs</b>
+              <div class="meta">Brain-lateralization, thalamocortical burst gating, event-locked memory mechanisms.</div>
+            </li>
+            <li class="item">
+              <b>Geometry-aware learning</b>
+              <div class="meta">Hyperbolic representations, equivariant design, and learnable symmetry importance.</div>
+            </li>
+            <li class="item">
+              <b>Dynamics-first time-series</b>
+              <div class="meta">Chaotic forecasting, operator viewpoints, and robust biomedical prediction.</div>
+            </li>
+          </ul>
         </div>
       </aside>
     </section>
 
     <!-- RESEARCH -->
-    <section id="research" class="grid">
-      <div class="card span8">
-        <h2>Research</h2>
-        <p>
-          DeepDynamics Lab investigates how <em>structure in dynamics</em> can guide the design of learning systems.
-          We combine dynamical systems, information geometry, and modern ML to build models that are
-          stable, sample-efficient, and scientifically grounded.
-        </p>
-        <ul>
-          <li>
-            <strong>Reservoir computing & Echo State Networks (ESNs):</strong>
-            designing reservoirs with geometry/topology, stability guarantees, and robust prediction.
-          </li>
-          <li>
-            <strong>Operator learning (Koopman / neural operators):</strong>
-            lifting nonlinear dynamics to linearizable representations for forecasting and control.
-          </li>
-          <li>
-            <strong>Intrinsic dimension & complexity of state representations:</strong>
-            measuring and leveraging low-dimensional structure in high-dimensional recurrent states.
-          </li>
-          <li>
-            <strong>Rigorous evaluation on chaotic systems:</strong>
-            Lorenz, Rössler, and related benchmarks; uncertainty and long-horizon behavior.
-          </li>
-        </ul>
-      </div>
+    <section class="card section" id="research">
+      <h2>Research themes</h2>
+      <p>
+        DeepDynamics develops methods that unify <b>biological plausibility</b>, <b>geometric structure</b>, and <b>dynamical stability</b>.
+        Representative directions include:
+      </p>
 
-      <div class="card span4">
-        <h2>Selected links</h2>
-        <div class="linkrow">
-          <a class="pill" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">Code</a>
-          <a class="pill" href="https://arxiv.org/" target="_blank" rel="noopener">arXiv</a>
-          <a class="pill" href="https://openreview.net/" target="_blank" rel="noopener">OpenReview</a>
-          <a class="pill" href="https://scholar.google.com/" target="_blank" rel="noopener">Scholar</a>
-          <a class="pill" href="https://www.semanticscholar.org/" target="_blank" rel="noopener">Semantic Scholar</a>
-          <a class="pill" href="https://orcid.org/" target="_blank" rel="noopener">ORCID</a>
+      <div class="grid two" style="margin-top:12px;">
+        <div class="item">
+          <b>Neuro-anatomically constrained computation</b>
+          <div class="meta">
+            Reservoirs shaped by cortical asymmetry and thalamocortical gating to enable controllable, event-aligned memory.
+          </div>
         </div>
-        <div class="divider"></div>
-        <p class="mini">
-          Tip: you can add your real links by replacing the URLs above. If you have a lab logo,
-          put <code>logo.png</code> in the repo and place it in the header.
-        </p>
+        <div class="item">
+          <b>Topological and geometric memory</b>
+          <div class="meta">
+            Hodge-anchored and topology-informed state evolution for stable long-horizon forecasting of chaotic flows.
+          </div>
+        </div>
+        <div class="item">
+          <b>Equivariance and symmetry importance</b>
+          <div class="meta">
+            Learnable symmetry weighting for equivariant networks via adaptive group-weighted convolutions.
+          </div>
+        </div>
+        <div class="item">
+          <b>Robust forecasting in complex signals</b>
+          <div class="meta">
+            Phase-modulated permutation reservoirs and geometry-aware couplings for physiological and chaotic systems.
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- BOOKS -->
+    <section class="card section" id="books">
+      <h2>Authored books</h2>
+      <ul class="clean">
+        <li class="item">
+          <b><a href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Deep Learning Through the Prism of Tensors</a></b>
+          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 610 pages • 2024 • ISBN: 978-981-97-8018-1</div>
+          <div class="links">
+            <a class="chiplink" href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Publisher page</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">The Geometry of Intelligence: Foundations of Transformer Networks in Deep Learning</a></b>
+          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 375 pages • 2025 • ISBN: 978-981-96-4705-7</div>
+          <div class="links">
+            <a class="chiplink" href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">Publisher page</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Artificial Intelligence and Machine Learning</a></b>
+          <div class="meta">P. Singh, T. K. Gandhi and R. Balasubramanian • McGraw Hill India • 584 pages • 2025 • ISBN: 978-936-44-4082-0</div>
+          <div class="links">
+            <a class="chiplink" href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Publisher page</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Python for Mathematical Thinking</a></b>
+          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 491 pages • 2026 • ISBN: 978-981-95-4079-2</div>
+          <div class="links">
+            <a class="chiplink" href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Publisher page</a>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- PUBLICATIONS -->
-    <section id="publications" class="grid">
-      <div class="card span12">
-        <h2>Publications & Preprints</h2>
-        <p class="muted">
-          A curated list (add/replace items). For a complete list, see
-          <a href="https://scholar.google.com/" target="_blank" rel="noopener"><strong>Google Scholar</strong></a>
-          or <a href="https://orcid.org/" target="_blank" rel="noopener"><strong>ORCID</strong></a>.
-        </p>
+    <section class="card section" id="publications">
+      <h2>Representative publications</h2>
+      <p>
+        Selected works spanning equivariant learning, neuro-inspired reservoirs, geometry-aware modeling, topological memory,
+        and robust biomedical forecasting.
+      </p>
 
-        <ul>
-          <li>
-            <strong>Geometry-aware reservoirs for chaotic time-series</strong> —
-            <span class="muted">preprint / journal</span>
-            · <a href="https://arxiv.org/" target="_blank" rel="noopener">arXiv</a>
-            · <a href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">code</a>
-          </li>
-          <li>
-            <strong>Intrinsic dimension of recurrent state distributions</strong> —
-            <span class="muted">conference / journal</span>
-            · <a href="https://openreview.net/" target="_blank" rel="noopener">OpenReview</a>
-            · <a href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">code</a>
-          </li>
-          <li>
-            <strong>Operator-theoretic views of sequence modeling</strong> —
-            <span class="muted">survey / notes</span>
-            · <a href="https://arxiv.org/" target="_blank" rel="noopener">arXiv</a>
-          </li>
-        </ul>
+      <ul class="clean">
+        <li class="item">
+          <b><a href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">Adaptive Group-Weighted Convolutions: Enhancing Equivariant Networks via Learnable Symmetry Importance Maps</a></b>
+          <div class="meta">P. Singh, K. Sharma and R. Balasubramanian • Neurocomputing (Elsevier), vol 671, 132689, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </li>
 
-        <p class="mini muted">
-          If you want, I can convert your real publication list into this format automatically (with DOI/arXiv links),
-          and also generate a <code>publications.html</code> page.
-        </p>
-      </div>
+        <li class="item">
+          <b><a href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">Brain-Lateralized Reservoirs: Neuro-Anatomically Constrained Echo State Networks for Chaotic and Physiological Signals</a></b>
+          <div class="meta">P. Singh, S. R. Dahale, Y. Tanwar, S. Gupta and R. Balasubramanian • Knowledge-Based Systems (Elsevier), vol 331, 114735, 2025 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Geometry-Aware Reservoirs: Patch-Wise Jacobian Lifting with Cross-Patch Couplings for Piecewise-Linear Modeling of Chaotic Flows</a></b>
+          <div class="meta">P. Singh, Hrishit B. P. and R. Balasubramanian • Chaos, Solitons & Fractals (Elsevier), vol 200(3), 117160, 2025 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Publisher</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">Hodge-Projected Echo-State Networks with Topologically Anchored Memory for Chaotic Flows</a></b>
+          <div class="meta">P. Singh, O. R. Madare and R. Balasubramanian • Chaos, Solitons & Fractals (Elsevier), vol 202(1), 117460, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">Thalamocortical Burst Gating Enables Event-Locked Memory</a></b>
+          <div class="meta">P. Singh and R. Balasubramanian • Knowledge-Based Systems (Elsevier), vol 333, 114947, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">Phase-Modulated Permutation Reservoirs for Robust Biomedical Time-Series Forecasting</a></b>
+          <div class="meta">P. Singh, S. Agrawal and R. Balasubramanian • Biomedical Signal Processing and Control (Elsevier), vol 116, 109460, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">DOI</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Hierarchical Fractal Reservoirs: Unsupervised Multiscale Symbolic Graphs for Long-Horizon Prediction of Chaotic Flows</a></b>
+          <div class="meta">P. Singh, S. Agrawal, S. R. Dahale, S. Ghosh and R. Balasubramanian • Neurocomputing (Elsevier), 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Symbolic Ordinal Partition Reservoirs for Model-Free Forecasting of Chaotic Flows</a></b>
+          <div class="meta">P. Singh, Hrishit B. P., S. Ghosh, A. Kumar and R. Balasubramanian • IEEE Transactions on Emerging Topics in Computational Intelligence, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">A Biologically Grounded Reservoir with Provable Dynamics and Slot-Based Working Memory</a></b>
+          <div class="meta">P. Singh, I. Jain and R. Balasubramanian • IEEE Transactions on Cognitive and Developmental Systems, 2026 • Q1</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">HypER: Hyperbolic Echo State Networks for Capturing Stretch-and-Fold Dynamics in Chaotic Flows</a></b>
+          <div class="meta">P. Singh, S. Ghosh, A. Kumar, Hrishit B. P. and R. Balasubramanian • ECAI 2025 (Bologna, Oct 25–30), pp. 3186–3193 • Oral • CORE A / ERA A</div>
+          <div class="links">
+            <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">Publisher</a>
+          </div>
+        </li>
+
+        <li class="item">
+          <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Frozen in Time: Parameter-Efficient Time Series Transformers via Reservoir-Induced Feature Expansion and Fixed Random Dynamics</a></b>
+          <div class="meta">P. Singh, M. Sharma, A. Dey and R. Balasubramanian • ECAI 2025 (Bologna, Oct 25–30), pp. 2283–2290 • Oral • CORE A / ERA A</div>
+          <div class="links">
+            <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Publisher</a>
+          </div>
+        </li>
+      </ul>
     </section>
 
-    <!-- SOFTWARE -->
-    <section id="software" class="grid">
-      <div class="card span6">
-        <h2>Software</h2>
-        <p>
-          We value reproducibility: code, seeds, benchmarks, and clean experimental protocols.
-        </p>
-        <ul>
-          <li><strong>DeepDynamics-ESN</strong> — reservoir and operator learning toolkit (coming soon)</li>
-          <li><strong>ChaosBench</strong> — standardized chaotic forecasting evaluation (coming soon)</li>
-          <li><strong>GeoTime</strong> — geometry-aware time-series utilities (coming soon)</li>
-        </ul>
-        <p class="mini muted">
-          Link each project to a GitHub repo once created.
-        </p>
-      </div>
+    <!-- RESOURCES -->
+    <section class="card section" id="resources">
+      <h2>Resources</h2>
+      <p>Curated links to documents, publication lists, and academic materials.</p>
+      <div class="grid two" style="margin-top:10px;">
+        <div class="item">
+          <b>Documents</b>
+          <div class="meta">Slides, manuscripts, supplementary material, and related resources.</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Open Google Drive folder</a>
+          </div>
+        </div>
 
-      <div class="card span6">
-        <h2>Teaching & Notes</h2>
-        <p>
-          Short notes and reading lists on: stability & contraction, ESNs, Koopman theory, and geometric ML.
-        </p>
-        <ul>
-          <li><a href="notes/reading-list.html">Reading list (dynamics × ML)</a></li>
-          <li><a href="notes/reservoirs.html">Reservoir computing: a modern view</a></li>
-          <li><a href="notes/koopman.html">Koopman operators for learning and control</a></li>
-        </ul>
-        <p class="mini muted">
-          Create these pages later—or delete this section for now.
-        </p>
-      </div>
-    </section>
+        <div class="item">
+          <b>Publications (full)</b>
+          <div class="meta">Complete publication list (PDF).</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/file/d/1MH9fBGe12Me9x_B-RLjzET-OrBUZmP-F/view" target="_blank" rel="noopener">Open PDF</a>
+          </div>
+        </div>
 
-    <!-- PEOPLE -->
-    <section id="people" class="grid">
-      <div class="card span8">
-        <h2>People</h2>
-        <p>
-          We supervise student projects and collaborate with researchers across ML theory and dynamical systems.
-          If you are interested in joining, send a short email with your background and interests.
-        </p>
-        <ul>
-          <li><strong>Dr. Pradeep Singh</strong> — PI</li>
-          <li><span class="muted">Students & collaborators</span> — (add names/roles here)</li>
-        </ul>
-      </div>
+        <div class="item">
+          <b>Detailed CV</b>
+          <div class="meta">Full academic CV (PDF).</div>
+          <div class="links">
+            <a class="chiplink" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener">Open PDF</a>
+          </div>
+        </div>
 
-      <div class="card span4">
-        <h2>Open positions</h2>
-        <p class="muted">
-          I occasionally host motivated students (B.Tech / M.Tech / PhD) and research interns.
-        </p>
-        <ul>
-          <li>Project topics: ESNs, operator learning, robust forecasting, geometry/topology in time-series</li>
-          <li>Preferred: strong math + Python + interest in dynamical systems</li>
-        </ul>
+        <div class="item">
+          <b>Online profiles</b>
+          <div class="meta">Homepage, lab site, ORCID, LinkedIn, GitHub.</div>
+          <div class="links">
+            <a class="chiplink" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener">Homepage</a>
+            <a class="chiplink" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener">Lab</a>
+            <a class="chiplink" href="https://orcid.org/0000-0002-5372-3355" target="_blank" rel="noopener">ORCID</a>
+            <a class="chiplink" href="https://www.linkedin.com/in/psiitd/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="chiplink" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="grid">
-      <div class="card span12">
-        <h2>Contact</h2>
-        <p class="muted">
-          Replace the placeholders with your official information.
-        </p>
-        <ul>
-          <li><strong>Email:</strong> <a href="mailto:your.email@domain.com">your.email@domain.com</a></li>
-          <li><strong>GitHub:</strong> <a href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">github.com/deepdynamicsai</a></li>
-          <li><strong>Scholar:</strong> <a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a></li>
-          <li><strong>ORCID:</strong> <a href="https://orcid.org/" target="_blank" rel="noopener">orcid.org</a></li>
-        </ul>
-        <div class="divider"></div>
-        <p class="mini muted">
-          © <span id="y"></span> DeepDynamics Lab • Built with plain HTML/CSS • Hosted on GitHub Pages
-        </p>
+    <section class="card section" id="contact">
+      <h2>Contact</h2>
+      <p>
+        Collaborations are welcome—especially on neuro-inspired learning, geometric representations,
+        dynamical systems, reservoir computing, and robust time-series modeling.
+      </p>
+      <div class="actions" style="margin-top:10px;">
+        <a class="btn primary" href="mailto:spradeep@iiitsurat.ac.in"><b>Email</b> <span class="tag">spradeep@iiitsurat.ac.in</span></a>
+        <a class="btn" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener"><b>Lab</b></a>
+        <a class="btn" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener"><b>Homepage</b></a>
+        <a class="btn" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener"><b>Detailed CV (PDF)</b></a>
       </div>
     </section>
 
-    <div class="foot">
-      <div>DeepDynamics Lab — learning from dynamics.</div>
-      <div class="linkrow">
-        <a class="pill" href="#research">Research</a>
-        <a class="pill" href="#publications">Publications</a>
-        <a class="pill" href="#contact">Contact</a>
+    <footer>
+      <div>
+        <span class="quiet">©</span> <span id="y"></span> <span class="quiet">DeepDynamics Lab</span> •
+        <span class="quiet">Neuroscience & Geometry-Inspired Machine Learning</span>
       </div>
-    </div>
+      <div class="right">
+        <a class="chiplink" href="#about">Top</a>
+        <a class="chiplink" href="#books">Books</a>
+        <a class="chiplink" href="#publications">Publications</a>
+      </div>
+    </footer>
   </div>
 
   <script>
