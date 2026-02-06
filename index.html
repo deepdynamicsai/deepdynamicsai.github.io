@@ -330,6 +330,57 @@
   color: var(--muted);
 }
 
+    /* University highlight */
+.uni{
+  display:inline-flex;
+  align-items:center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--a) 12%, var(--panel2));
+  color: var(--text);
+  font-weight: 720;
+  letter-spacing: .15px;
+}
+
+/* Make IIT Delhi and IIT Madras identical + impactful */
+.uni.iit{
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--a) 18%, var(--panel2)),
+      color-mix(in srgb, var(--b) 12%, var(--panel2))
+    );
+  border-color: color-mix(in srgb, var(--a) 35%, var(--line));
+}
+
+/* IIIT Surat: different style but still elegant */
+.uni.iiit{
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--c) 20%, var(--panel2)),
+      color-mix(in srgb, var(--a) 10%, var(--panel2))
+    );
+  border-color: color-mix(in srgb, var(--c) 40%, var(--line));
+}
+
+/* Make badges slightly more premium */
+.badge{
+  box-shadow: 0 8px 22px rgba(0,0,0,.14);
+}
+
+/* Optional: tiny dot before institute for authority */
+.uni::before{
+  content:"";
+  width:6px; height:6px; border-radius:99px;
+  margin-right:7px;
+  background: linear-gradient(135deg, var(--b), var(--a));
+  opacity: .9;
+}
+.uni.iiit::before{
+  background: linear-gradient(135deg, var(--c), var(--a));
+}
+
+
   </style>
 </head>
 
@@ -393,19 +444,34 @@
   <div class="line1">
     Principal Investigator: <b>Dr. S. Pradeep</b>
     <span class="sep">•</span>
-    <span class="quiet">IIIT Surat</span>
+    <span class="uni iiit">IIIT Surat</span>
   </div>
 
   <div class="line2">
-    <span class="badge"><strong>PhD</strong><span>Symbolic Systems, IIT Delhi</span></span>
-    <span class="badge"><strong>MSc</strong><span>Mathematics, IIT Delhi</span></span>
+    <span class="badge">
+      <strong>PhD</strong>
+      <span>Symbolic Systems, <span class="uni iit">IIT Delhi</span></span>
+    </span>
+
+    <span class="badge">
+      <strong>MSc</strong>
+      <span>Mathematics, <span class="uni iit">IIT Delhi</span></span>
+    </span>
   </div>
 
   <div class="line3">
-    <span class="badge"><strong>BS</strong><span>Data Science, IIT Madras</span></span>
-    <span class="badge"><strong>MTech</strong><span>AI &amp; ML, IIT Madras</span></span>
+    <span class="badge">
+      <strong>BS</strong>
+      <span>Data Science, <span class="uni iit">IIT Madras</span></span>
+    </span>
+
+    <span class="badge">
+      <strong>MTech</strong>
+      <span>AI &amp; ML, <span class="uni iit">IIT Madras</span></span>
+    </span>
   </div>
 </div>
+
 
 
 
