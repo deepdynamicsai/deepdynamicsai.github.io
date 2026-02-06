@@ -380,6 +380,60 @@
   background: linear-gradient(135deg, var(--c), var(--a));
 }
 
+    /* Headline: semantic fade + DeepDynamics emphasis */
+.headline-dyn{
+  margin: 10px 0 10px;
+  font-family: var(--serif);
+  font-weight: 750;
+  letter-spacing: -0.6px;
+  line-height: 1.08;
+  font-size: 40px;           /* reduced from 44 */
+}
+
+@media (max-width: 520px){
+  .headline-dyn{ font-size: 34px; }
+}
+
+.fade{
+  opacity: .88;
+}
+
+.fade2{
+  opacity: .62;
+}
+
+.via{
+  opacity: .52;
+  font-weight: 650;
+  letter-spacing: .02em;
+}
+
+.dynamics{
+  opacity: .74;
+}
+
+.deepdynamics{
+  display:inline-block;
+  padding: 2px 10px 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(700px 140px at 20% 20%, color-mix(in srgb, var(--a) 22%, transparent), transparent 60%),
+    radial-gradient(700px 140px at 90% 80%, color-mix(in srgb, var(--b) 16%, transparent), transparent 62%),
+    color-mix(in srgb, var(--panel) 88%, transparent);
+  box-shadow: var(--shadow2);
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.deepdynamics .deep{
+  color: color-mix(in srgb, var(--a) 78%, var(--text));
+}
+
+.deepdynamics .dyn{
+  color: color-mix(in srgb, var(--b) 72%, var(--text));
+}
+
 
   </style>
 </head>
@@ -408,7 +462,16 @@
     <section class="grid hero" id="about">
       <div class="card">
         <div class="kicker"><span class="dot" aria-hidden="true"></span> DeepDynamics Lab • IIIT Surat</div>
-        <h1>Deep learning via dynamics.</h1>
+        <h1 class="headline-dyn" aria-label="Deep learning via dynamics leading to DeepDynamics">
+    <span class="fade">Deep</span>
+    <span class="fade2"> learning</span>
+    <span class="via"> via</span>
+    <span class="dynamics"> dynamics</span><span class="fade2">.</span>
+    <span style="display:inline-block; margin-left:10px; opacity:.35;">→</span>
+    <span class="deepdynamics">
+      <span class="deep">Deep</span><span class="dyn">Dynamics</span>
+    </span>
+  </h1>
         <p class="subtitle">
           We build <em>neuroscience-grounded</em> and <em>geometry-aware</em> learning systems for dynamical signals—
           from chaotic flows to physiological time-series—by blending rigorous theory with practical, reproducible methods.
