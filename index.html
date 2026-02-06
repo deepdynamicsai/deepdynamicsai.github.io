@@ -262,6 +262,74 @@
       .btn, .chiplink{ transition:none; }
       .btn:hover, .chiplink:hover{ transform:none; }
     }
+
+
+    /* PI credential strip */
+.pi-strip{
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(900px 220px at 0% 0%, color-mix(in srgb, var(--a) 18%, transparent), transparent 55%),
+    radial-gradient(900px 220px at 100% 100%, color-mix(in srgb, var(--b) 14%, transparent), transparent 58%),
+    color-mix(in srgb, var(--panel) 88%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.pi-strip::before{
+  content:"";
+  position:absolute; left:0; top:0; bottom:0; width:3px;
+  background: linear-gradient(180deg, var(--a), var(--b));
+  opacity: .95;
+}
+
+.pi-strip .line1{
+  font-size: 12.5px;
+  color: var(--soft);
+}
+
+.pi-strip .line1 b{
+  font-weight: 750;
+  letter-spacing: .2px;
+}
+
+.pi-strip .sep{
+  color: var(--muted);
+  padding: 0 6px;
+}
+
+.pi-strip .line2, .pi-strip .line3{
+  font-size: 12.2px;
+  color: var(--muted);
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel2) 92%, transparent);
+  color: var(--soft);
+  letter-spacing: .1px;
+}
+
+.badge strong{
+  font-weight: 750;
+  color: var(--text);
+}
+
+.badge span{
+  color: var(--muted);
+}
+
   </style>
 </head>
 
@@ -317,12 +385,28 @@
           <span class="pill">Stability & representation geometry</span>
         </div>
 
-       <div class="rule"></div>
-<p class="mini">
-  Principal Investigator: <b>Dr. S. Pradeep</b> • <span class="quiet">IIIT Surat</span><br/>
-  PhD (Symbolic Systems), IIT Delhi · MSc (Mathematics), IIT Delhi<br/>
-  BS (Data Science), IIT Madras · MTech (AI &amp; ML), IIT Madras
-</p>
+       
+
+        <div class="rule"></div>
+
+<div class="pi-strip">
+  <div class="line1">
+    Principal Investigator: <b>Dr. S. Pradeep</b>
+    <span class="sep">•</span>
+    <span class="quiet">IIIT Surat</span>
+  </div>
+
+  <div class="line2">
+    <span class="badge"><strong>PhD</strong><span>Symbolic Systems, IIT Delhi</span></span>
+    <span class="badge"><strong>MSc</strong><span>Mathematics, IIT Delhi</span></span>
+  </div>
+
+  <div class="line3">
+    <span class="badge"><strong>BS</strong><span>Data Science, IIT Madras</span></span>
+    <span class="badge"><strong>MTech</strong><span>AI &amp; ML, IIT Madras</span></span>
+  </div>
+</div>
+
 
 
       </div>
