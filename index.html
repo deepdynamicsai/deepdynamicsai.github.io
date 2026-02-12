@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <title>DeepDynamics Lab — Machine Learning × Dynamical Systems</title>
-  <meta name="description" content="DeepDynamics Lab — neuroscience- and geometry-inspired machine learning." />
+  <title>DeepDynamics Lab — Neuroscience & Geometry-Inspired Machine Learning</title>
+  <meta name="description" content="DeepDynamics Lab — neuroscience- and geometry-inspired machine learning for dynamical signals." />
 
   <!-- Elegant inline favicon (no external files) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3CradialGradient id='g' cx='32%25' cy='28%25'%3E%3Cstop offset='0' stop-color='%2381a9ff'/%3E%3Cstop offset='1' stop-color='%2310192a'/%3E%3C/radialGradient%3E%3ClinearGradient id='h' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2368f0c8'/%3E%3Cstop offset='1' stop-color='%2381a9ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='128' height='128' rx='28' fill='url(%23g)'/%3E%3Cpath d='M26 86c14-22 26-32 38-32s24 10 38 32' fill='none' stroke='url(%23h)' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M26 46c14 22 26 32 38 32s24-10 38-32' fill='none' stroke='rgba(255,255,255,.22)' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E" />
@@ -119,12 +119,122 @@
       background: color-mix(in srgb, var(--panel) 92%, transparent);
       box-shadow: var(--shadow);
       padding: 22px;
+      position: relative;
+      overflow: hidden;
     }
     .card.soft{
       background: color-mix(in srgb, var(--panel2) 92%, transparent);
       box-shadow: none;
     }
 
+    /* ---------- SECTION DISTINCTION LAYER ---------- */
+    .section-wrap{
+      margin-top: 18px;
+      border-radius: calc(var(--r) + 6px);
+      border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+      background: color-mix(in srgb, var(--panel2) 84%, transparent);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-wrap::before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle at 30% 30%,
+        color-mix(in srgb, var(--a) 22%, transparent),
+        transparent 60%);
+      opacity: .9;
+      pointer-events:none;
+    }
+    .section-wrap::after{
+      content:"";
+      position:absolute; inset:auto auto -140px -140px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle at 70% 60%,
+        color-mix(in srgb, var(--b) 16%, transparent),
+        transparent 62%);
+      opacity: .85;
+      pointer-events:none;
+    }
+    .section-wrap > *{ position: relative; z-index: 1; }
+
+    /* Accent variants per section (publications, contact, etc.) */
+    .section-wrap.pub{
+      background:
+        radial-gradient(1200px 240px at 25% 0%,
+          color-mix(in srgb, var(--a) 18%, transparent),
+          transparent 60%),
+        radial-gradient(1200px 240px at 85% 100%,
+          color-mix(in srgb, var(--b) 14%, transparent),
+          transparent 62%),
+        color-mix(in srgb, var(--panel2) 86%, transparent);
+      border-color: color-mix(in srgb, var(--a) 28%, var(--line));
+    }
+    .section-wrap.books{
+      background:
+        radial-gradient(1200px 240px at 25% 0%,
+          color-mix(in srgb, var(--c) 16%, transparent),
+          transparent 62%),
+        radial-gradient(1200px 240px at 85% 100%,
+          color-mix(in srgb, var(--a) 12%, transparent),
+          transparent 62%),
+        color-mix(in srgb, var(--panel2) 86%, transparent);
+      border-color: color-mix(in srgb, var(--c) 26%, var(--line));
+    }
+    .section-wrap.contact{
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--a) 14%, var(--panel2)),
+          color-mix(in srgb, var(--b) 10%, var(--panel2))
+        );
+      border-color: color-mix(in srgb, var(--b) 26%, var(--line));
+    }
+    .section-wrap.resources{
+      background:
+        radial-gradient(1200px 240px at 10% 50%,
+          color-mix(in srgb, var(--b) 12%, transparent),
+          transparent 64%),
+        color-mix(in srgb, var(--panel2) 86%, transparent);
+      border-color: color-mix(in srgb, var(--b) 22%, var(--line));
+    }
+    .section-wrap.inspo{
+      background:
+        radial-gradient(1200px 240px at 20% 0%,
+          color-mix(in srgb, var(--a) 12%, transparent),
+          transparent 64%),
+        radial-gradient(1200px 240px at 80% 100%,
+          color-mix(in srgb, var(--c) 10%, transparent),
+          transparent 64%),
+        color-mix(in srgb, var(--panel2) 86%, transparent);
+      border-color: color-mix(in srgb, var(--a) 20%, var(--line));
+    }
+
+    /* Optional: Section header ribbon inside each wrap */
+    .sec-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      margin: -4px 0 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 80%, transparent);
+    }
+    .sec-head .title{
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display:flex; align-items:center; gap:10px;
+    }
+    .sec-head .hint{
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Kicker / Dot */
     .kicker{
       font-size: 12px;
       letter-spacing: .18em;
@@ -138,16 +248,7 @@
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--a) 12%, transparent);
     }
 
-    h1{
-      font-family: var(--serif);
-      font-weight: 700;
-      letter-spacing: -0.7px;
-      line-height: 1.06;
-      font-size: 44px;
-      margin: 10px 0 10px;
-    }
-    @media (max-width: 520px){ h1{ font-size: 38px; } }
-
+    /* Text */
     .subtitle{
       margin: 0 0 16px;
       color: var(--soft);
@@ -160,6 +261,7 @@
       font-size: 15px;
     }
 
+    /* Buttons */
     .actions{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .btn{
       display:inline-flex; align-items:center; gap: 10px;
@@ -192,6 +294,7 @@
       color: var(--muted);
     }
 
+    /* Pills */
     .pillrow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
     .pill{
       font-size: 12px;
@@ -202,10 +305,7 @@
       border-radius: 999px;
     }
 
-    .mini{ font-size: 12px; color: var(--muted); }
-    .rule{ height:1px; background: var(--line); margin: 16px 0; }
-
-    /* Section headers */
+    /* Sections */
     .section{ margin-top: 16px; }
     .section h2{
       margin: 0 0 10px;
@@ -214,7 +314,7 @@
     }
     .section p{ margin: 0 0 10px; color: var(--muted); }
 
-    /* Two-column content grid */
+    /* Two-column grid */
     .two{ grid-template-columns: 1fr 1fr; }
     @media (max-width: 920px){ .two{ grid-template-columns: 1fr; } }
 
@@ -238,12 +338,145 @@
       background: color-mix(in srgb, var(--panel) 86%, transparent);
       font-size: 12px;
       color: var(--soft);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
     .chiplink:hover{
       border-color: color-mix(in srgb, var(--b) 40%, var(--line));
       color: var(--text);
       transform: translateY(-1px);
     }
+
+    .mini{ font-size: 12px; color: var(--muted); }
+    .rule{ height:1px; background: var(--line); margin: 16px 0; }
+    .quiet{ color: var(--muted); }
+
+    /* PI credential strip */
+    .pi-strip{
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(900px 220px at 0% 0%, color-mix(in srgb, var(--a) 18%, transparent), transparent 55%),
+        radial-gradient(900px 220px at 100% 100%, color-mix(in srgb, var(--b) 14%, transparent), transparent 58%),
+        color-mix(in srgb, var(--panel) 88%, transparent);
+      position: relative;
+      overflow: hidden;
+    }
+    .pi-strip::before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0; width:3px;
+      background: linear-gradient(180deg, var(--a), var(--b));
+      opacity: .95;
+    }
+    .pi-strip .line1{
+      font-size: 12.6px;
+      color: var(--soft);
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .pi-strip .line1 b{
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .pi-strip .line2, .pi-strip .line3{
+      font-size: 12.2px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 92%, transparent);
+      color: var(--soft);
+      letter-spacing: .1px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.14);
+    }
+    .badge strong{
+      font-weight: 820;
+      color: var(--text);
+    }
+    .badge span{ color: var(--muted); }
+
+    /* University highlight */
+    .uni{
+      display:inline-flex;
+      align-items:center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--a) 12%, var(--panel2));
+      color: var(--text);
+      font-weight: 760;
+      letter-spacing: .15px;
+      white-space: nowrap;
+    }
+    .uni.iit{
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--a) 18%, var(--panel2)),
+          color-mix(in srgb, var(--b) 12%, var(--panel2))
+        );
+      border-color: color-mix(in srgb, var(--a) 35%, var(--line));
+    }
+    .uni.iiit{
+      background:
+        linear-gradient(135deg,
+          color-mix(in srgb, var(--c) 20%, var(--panel2)),
+          color-mix(in srgb, var(--a) 10%, var(--panel2))
+        );
+      border-color: color-mix(in srgb, var(--c) 40%, var(--line));
+    }
+    .uni::before{
+      content:"";
+      width:6px; height:6px; border-radius:99px;
+      margin-right:7px;
+      background: linear-gradient(135deg, var(--b), var(--a));
+      opacity: .9;
+    }
+    .uni.iiit::before{ background: linear-gradient(135deg, var(--c), var(--a)); }
+
+    /* Headline: semantic fade + DeepDynamics emphasis */
+    .headline-dyn{
+      margin: 10px 0 10px;
+      font-family: var(--serif);
+      font-weight: 780;
+      letter-spacing: -0.6px;
+      line-height: 1.08;
+      font-size: 40px;
+    }
+    @media (max-width: 520px){ .headline-dyn{ font-size: 34px; } }
+
+    .fade{ opacity: .88; }
+    .fade2{ opacity: .58; }
+    .via{
+      opacity: .50;
+      font-weight: 680;
+      letter-spacing: .02em;
+    }
+    .dynamics{ opacity: .74; }
+
+    .deepdynamics{
+      display:inline-block;
+      padding: 2px 10px 3px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(700px 140px at 20% 20%, color-mix(in srgb, var(--a) 22%, transparent), transparent 60%),
+        radial-gradient(700px 140px at 90% 80%, color-mix(in srgb, var(--b) 16%, transparent), transparent 62%),
+        color-mix(in srgb, var(--panel) 88%, transparent);
+      box-shadow: var(--shadow2);
+      font-weight: 850;
+      letter-spacing: -0.2px;
+    }
+    .deepdynamics .deep{ color: color-mix(in srgb, var(--a) 78%, var(--text)); }
+    .deepdynamics .dyn{ color: color-mix(in srgb, var(--b) 72%, var(--text)); }
 
     /* Footer */
     footer{
@@ -255,186 +488,12 @@
       font-size: 12px;
     }
     footer .right{ display:flex; gap: 10px; flex-wrap:wrap; }
-    .quiet{ color: var(--muted); }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .btn, .chiplink{ transition:none; }
       .btn:hover, .chiplink:hover{ transform:none; }
     }
-
-
-    /* PI credential strip */
-.pi-strip{
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  background:
-    radial-gradient(900px 220px at 0% 0%, color-mix(in srgb, var(--a) 18%, transparent), transparent 55%),
-    radial-gradient(900px 220px at 100% 100%, color-mix(in srgb, var(--b) 14%, transparent), transparent 58%),
-    color-mix(in srgb, var(--panel) 88%, transparent);
-  position: relative;
-  overflow: hidden;
-}
-
-.pi-strip::before{
-  content:"";
-  position:absolute; left:0; top:0; bottom:0; width:3px;
-  background: linear-gradient(180deg, var(--a), var(--b));
-  opacity: .95;
-}
-
-.pi-strip .line1{
-  font-size: 12.5px;
-  color: var(--soft);
-}
-
-.pi-strip .line1 b{
-  font-weight: 750;
-  letter-spacing: .2px;
-}
-
-.pi-strip .sep{
-  color: var(--muted);
-  padding: 0 6px;
-}
-
-.pi-strip .line2, .pi-strip .line3{
-  font-size: 12.2px;
-  color: var(--muted);
-  margin-top: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel2) 92%, transparent);
-  color: var(--soft);
-  letter-spacing: .1px;
-}
-
-.badge strong{
-  font-weight: 750;
-  color: var(--text);
-}
-
-.badge span{
-  color: var(--muted);
-}
-
-    /* University highlight */
-.uni{
-  display:inline-flex;
-  align-items:center;
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--a) 12%, var(--panel2));
-  color: var(--text);
-  font-weight: 720;
-  letter-spacing: .15px;
-}
-
-
-.uni.iit{
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--a) 18%, var(--panel2)),
-      color-mix(in srgb, var(--b) 12%, var(--panel2))
-    );
-  border-color: color-mix(in srgb, var(--a) 35%, var(--line));
-}
-
-
-.uni.iiit{
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--c) 20%, var(--panel2)),
-      color-mix(in srgb, var(--a) 10%, var(--panel2))
-    );
-  border-color: color-mix(in srgb, var(--c) 40%, var(--line));
-}
-
-
-.badge{
-  box-shadow: 0 8px 22px rgba(0,0,0,.14);
-}
-
-/* Optional: tiny dot before institute for authority */
-.uni::before{
-  content:"";
-  width:6px; height:6px; border-radius:99px;
-  margin-right:7px;
-  background: linear-gradient(135deg, var(--b), var(--a));
-  opacity: .9;
-}
-.uni.iiit::before{
-  background: linear-gradient(135deg, var(--c), var(--a));
-}
-
-    /* Headline: semantic fade + DeepDynamics emphasis */
-.headline-dyn{
-  margin: 10px 0 10px;
-  font-family: var(--serif);
-  font-weight: 750;
-  letter-spacing: -0.6px;
-  line-height: 1.08;
-  font-size: 40px;           /* reduced from 44 */
-}
-
-@media (max-width: 520px){
-  .headline-dyn{ font-size: 34px; }
-}
-
-.fade{
-  opacity: .88;
-}
-
-.fade2{
-  opacity: .62;
-}
-
-.via{
-  opacity: .52;
-  font-weight: 650;
-  letter-spacing: .02em;
-}
-
-.dynamics{
-  opacity: .74;
-}
-
-.deepdynamics{
-  display:inline-block;
-  padding: 2px 10px 3px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background:
-    radial-gradient(700px 140px at 20% 20%, color-mix(in srgb, var(--a) 22%, transparent), transparent 60%),
-    radial-gradient(700px 140px at 90% 80%, color-mix(in srgb, var(--b) 16%, transparent), transparent 62%),
-    color-mix(in srgb, var(--panel) 88%, transparent);
-  box-shadow: var(--shadow2);
-  font-weight: 800;
-  letter-spacing: -0.2px;
-}
-
-.deepdynamics .deep{
-  color: color-mix(in srgb, var(--a) 78%, var(--text));
-}
-
-.deepdynamics .dyn{
-  color: color-mix(in srgb, var(--b) 72%, var(--text));
-}
-
-
   </style>
 </head>
 
@@ -445,14 +504,13 @@
         <div class="mark" aria-hidden="true"></div>
         <div class="t">
           <b>DeepDynamics Lab</b>
-          <span>Machine Learning × Dynamical Systems</span>
+          <span>Neuroscience & Geometry-Inspired Machine Learning</span>
         </div>
       </div>
       <nav>
         <a href="#about">About</a>
         <a href="#research">Research</a>
         <a href="#inspirations">Inspirations</a>
-
         <a href="#books">Books</a>
         <a href="#publications">Publications</a>
         <a href="#resources">Resources</a>
@@ -464,14 +522,16 @@
     <section class="grid hero" id="about">
       <div class="card">
         <div class="kicker"><span class="dot" aria-hidden="true"></span> DeepDynamics Lab • IIIT Surat</div>
+
         <h1 class="headline-dyn" aria-label="Deep learning via dynamics leading to DeepDynamics">
-    <span class="fade">Deep</span>
-    <span class="fade2"> learning</span>
-    <span class="via"> via</span>
-    <span class="dynamics"> dynamics</span><span class="fade2">.</span>
-    
-  
-  </h1>
+          <span class="fade">Deep</span>
+          <span class="fade2"> learning</span>
+          <span class="via"> via</span>
+          <span class="dynamics"> dynamics</span><span class="fade2">.</span>
+          <span style="display:inline-block; margin-left:10px; opacity:.32;">→</span>
+          <span class="deepdynamics"><span class="deep">Deep</span><span class="dyn">Dynamics</span></span>
+        </h1>
+
         <p class="subtitle">
           We build <em>neuroscience-grounded</em> and <em>geometry-aware</em> learning systems for dynamical signals—
           from chaotic flows to physiological signals.
@@ -487,7 +547,7 @@
           <a class="btn" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener"><b>Homepage</b></a>
           <a class="btn" href="https://orcid.org/0000-0002-5372-3355" target="_blank" rel="noopener"><b>ORCID</b></a>
           <a class="btn" href="https://www.linkedin.com/in/psiitd/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
-          <a class="btn" href="https://github.com/deepdyn" target="_blank" rel="noopener"><b>GitHub</b></a>
+          <a class="btn" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener"><b>GitHub</b></a>
         </div>
 
         <div class="pillrow" aria-label="Key topics">
@@ -499,46 +559,25 @@
           <span class="pill">Stability & representation geometry</span>
         </div>
 
-       
-
         <div class="rule"></div>
 
-<div class="pi-strip">
-  <div class="line1">
-    Principal Investigator: <b>Dr. S. Pradeep</b>
-    <span class="uni iiit">IIIT Surat</span>
-  </div>
+        <div class="pi-strip">
+          <div class="line1">
+            Principal Investigator: <b>Dr. S. Pradeep</b>
+            <span class="uni iiit">IIIT Surat</span>
+          </div>
 
-  <div class="line2">
-    <span class="badge">
-      <strong>PhD</strong>
-      <span>Symbolic Systems <span class="uni iit">IIT Delhi</span></span>
-    </span>
+          <div class="line2">
+            <span class="badge"><strong>PhD</strong><span>Symbolic Systems <span class="uni iit">IIT Delhi</span></span></span>
+            <span class="badge"><strong>MSc</strong><span>Mathematics <span class="uni iit">IIT Delhi</span></span></span>
+          </div>
 
-    <span class="badge">
-      <strong>MSc</strong>
-      <span>Mathematics <span class="uni iit">IIT Delhi</span></span>
-    </span>
-  </div>
-
-  <div class="line3">
-    <span class="badge">
-      <strong>BS</strong>
-      <span>Data Science <span class="uni iit">IIT Madras</span></span>
-    </span>
-
-    <span class="badge">
-      <strong>MTech</strong>
-      <span>AI &amp; ML <span class="uni iit">IIT Madras</span></span>
-    </span>
-  </div>
-</div>
-
-
-
-
+          <div class="line3">
+            <span class="badge"><strong>BS</strong><span>Data Science <span class="uni iit">IIT Madras</span></span></span>
+            <span class="badge"><strong>MTech</strong><span>AI &amp; ML <span class="uni iit">IIT Madras</span></span></span>
+          </div>
+        </div>
       </div>
-
 
       <aside class="card soft">
         <div class="section">
@@ -572,294 +611,320 @@
       </aside>
     </section>
 
-    <!-- RESEARCH -->
-    <section class="card section" id="research">
-      <h2>Research themes</h2>
-      <p>
-        DeepDynamics develops methods that unify <b>biological plausibility</b>, <b>geometric structure</b>, and <b>dynamical stability</b>.
-        Representative directions include:
-      </p>
-
-      <div class="grid two" style="margin-top:12px;">
-        <div class="item">
-          <b>Neuro-anatomically constrained computation</b>
-          <div class="meta">
-            Reservoirs shaped by cortical asymmetry and thalamocortical gating to enable controllable, event-aligned memory.
-          </div>
-        </div>
-        <div class="item">
-          <b>Topological and geometric memory</b>
-          <div class="meta">
-            Hodge-anchored and topology-informed state evolution for stable long-horizon forecasting of chaotic flows.
-          </div>
-        </div>
-        <div class="item">
-          <b>Equivariance and symmetry importance</b>
-          <div class="meta">
-            Learnable symmetry weighting for equivariant networks via adaptive group-weighted convolutions.
-          </div>
-        </div>
-        <div class="item">
-          <b>Robust forecasting in complex signals</b>
-          <div class="meta">
-            Phase-modulated permutation reservoirs and geometry-aware couplings for physiological and chaotic systems.
-          </div>
-        </div>
+    <!-- RESEARCH (wrapped for section distinction) -->
+    <section class="section-wrap" id="research">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Research</div>
+        <div class="hint">themes & directions</div>
       </div>
+
+      <section class="card section">
+        <h2>Research themes</h2>
+        <p>
+          DeepDynamics develops methods that unify <b>biological plausibility</b>, <b>geometric structure</b>, and <b>dynamical stability</b>.
+          Representative directions include:
+        </p>
+
+        <div class="grid two" style="margin-top:12px;">
+          <div class="item">
+            <b>Neuro-anatomically constrained computation</b>
+            <div class="meta">
+              Reservoirs shaped by cortical asymmetry and thalamocortical gating to enable controllable, event-aligned memory.
+            </div>
+          </div>
+          <div class="item">
+            <b>Topological and geometric memory</b>
+            <div class="meta">
+              Hodge-anchored and topology-informed state evolution for stable long-horizon forecasting of chaotic flows.
+            </div>
+          </div>
+          <div class="item">
+            <b>Equivariance and symmetry importance</b>
+            <div class="meta">
+              Learnable symmetry weighting for equivariant networks via adaptive group-weighted convolutions.
+            </div>
+          </div>
+          <div class="item">
+            <b>Robust forecasting in complex signals</b>
+            <div class="meta">
+              Phase-modulated permutation reservoirs and geometry-aware couplings for physiological and chaotic systems.
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
 
-
-
-<section class="card section" id="inspirations">
-  <h2>Inspirations & related work</h2>
-  <p>
-    Selected external ideas we admire—especially those that treat <b>time</b>, <b>neural dynamics</b>, and
-    <b>biological structure</b> as first-class design principles for modern learning systems.
-  </p>
-
-  <ul class="clean">
-    <li class="item">
-      <b>
-        <a href="https://pub.sakana.ai/ctm/" target="_blank" rel="noopener">
-          Continuous Thought Machines (CTM)
-        </a>
-      </b>
-      <div class="meta">
-        Fits DeepDynamics: a dynamics-first architecture where <b>neural timing</b> and <b>synchronization</b> act as core
-        computational primitives—highly aligned with neuroscience-inspired sequence reasoning.
+    <!-- INSPIRATIONS (distinct wrap) -->
+    <section class="section-wrap inspo" id="inspirations">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Inspirations</div>
+        <div class="hint">ideas we admire</div>
       </div>
-      <div class="links">
-        <a class="chiplink" href="https://pub.sakana.ai/ctm/" target="_blank" rel="noopener">Project</a>
-        <a class="chiplink" href="https://arxiv.org/abs/2505.05522" target="_blank" rel="noopener">arXiv</a>
-        <a class="chiplink" href="https://github.com/SakanaAI/continuous-thought-machines" target="_blank" rel="noopener">Code</a>
-      </div>
-    </li>
 
-    <li class="item">
-      <b>
-        <a href="https://github.com/pathwaycom/bdh" target="_blank" rel="noopener">
-          Baby Dragon Hatchling (BDH) / The Dragon Hatchling
-        </a>
-      </b>
-      <div class="meta">
-        Fits DeepDynamics: a <b>brain-like scale-free interaction graph</b> with <b>synaptic plasticity</b> and inherent interpretability,
-        offering a compelling bridge between Transformers and biologically grounded computation.
-      </div>
-      <div class="links">
-        <a class="chiplink" href="https://github.com/pathwaycom/bdh" target="_blank" rel="noopener">Code</a>
-        <a class="chiplink" href="https://arxiv.org/abs/2509.26507" target="_blank" rel="noopener">arXiv</a>
-        <a class="chiplink" href="https://www.youtube.com/watch?v=mfV44-mtg7c" target="_blank" rel="noopener">Video</a>
-      </div>
-    </li>
-  </ul>
-</section>
+      <section class="card section">
+        <h2>Inspirations & related work</h2>
+        <p>
+          Selected external ideas we admire—especially those that treat <b>time</b>, <b>neural dynamics</b>, and
+          <b>biological structure</b> as first-class design principles for modern learning systems.
+        </p>
 
+        <ul class="clean">
+          <li class="item">
+            <b><a href="https://pub.sakana.ai/ctm/" target="_blank" rel="noopener">Continuous Thought Machines (CTM)</a></b>
+            <div class="meta">
+              Fits DeepDynamics: a dynamics-first architecture where <b>neural timing</b> and <b>synchronization</b> act as core
+              computational primitives—aligned with neuroscience-inspired sequence reasoning.
+            </div>
+            <div class="links">
+              <a class="chiplink" href="https://pub.sakana.ai/ctm/" target="_blank" rel="noopener">Project</a>
+              <a class="chiplink" href="https://arxiv.org/abs/2505.05522" target="_blank" rel="noopener">arXiv</a>
+              <a class="chiplink" href="https://github.com/SakanaAI/continuous-thought-machines" target="_blank" rel="noopener">Code</a>
+            </div>
+          </li>
 
-
-
-
-
-
-    
-
-    <!-- BOOKS -->
-    <section class="card section" id="books">
-      <h2>Authored books</h2>
-      <ul class="clean">
-        <li class="item">
-          <b><a href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Deep Learning Through the Prism of Tensors</a></b>
-          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 610 pages • 2024 • ISBN: 978-981-97-8018-1</div>
-          <div class="links">
-            <a class="chiplink" href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Publisher page</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">The Geometry of Intelligence: Foundations of Transformer Networks in Deep Learning</a></b>
-          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 375 pages • 2025 • ISBN: 978-981-96-4705-7</div>
-          <div class="links">
-            <a class="chiplink" href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">Publisher page</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Artificial Intelligence and Machine Learning</a></b>
-          <div class="meta">P. Singh, T. K. Gandhi and R. Balasubramanian • McGraw Hill India • 584 pages • 2025 • ISBN: 978-936-44-4082-0</div>
-          <div class="links">
-            <a class="chiplink" href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Publisher page</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Python for Mathematical Thinking</a></b>
-          <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 491 pages • 2026 • ISBN: 978-981-95-4079-2</div>
-          <div class="links">
-            <a class="chiplink" href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Publisher page</a>
-          </div>
-        </li>
-      </ul>
+          <li class="item">
+            <b><a href="https://github.com/pathwaycom/bdh" target="_blank" rel="noopener">Baby Dragon Hatchling (BDH) / The Dragon Hatchling</a></b>
+            <div class="meta">
+              Fits DeepDynamics: a <b>brain-like scale-free interaction graph</b> with <b>synaptic plasticity</b> and interpretability,
+              suggesting a bridge between Transformers and biologically grounded computation.
+            </div>
+            <div class="links">
+              <a class="chiplink" href="https://github.com/pathwaycom/bdh" target="_blank" rel="noopener">Code</a>
+              <a class="chiplink" href="https://arxiv.org/abs/2509.26507" target="_blank" rel="noopener">arXiv</a>
+              <a class="chiplink" href="https://www.youtube.com/watch?v=mfV44-mtg7c" target="_blank" rel="noopener">Video</a>
+            </div>
+          </li>
+        </ul>
+      </section>
     </section>
 
-    <!-- PUBLICATIONS -->
-    <section class="card section" id="publications">
-      <h2>Representative publications</h2>
-      <p>
-        Selected works spanning equivariant learning, neuro-inspired reservoirs, geometry-aware modeling and topological memory.
-      </p>
+    <!-- BOOKS (distinct wrap) -->
+    <section class="section-wrap books" id="books">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Books</div>
+        <div class="hint">authored volumes</div>
+      </div>
 
-      <ul class="clean">
-        <li class="item">
-          <b><a href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">Adaptive Group-Weighted Convolutions: Enhancing Equivariant Networks via Learnable Symmetry Importance Maps</a></b>
-          <div class="meta">P. Singh, K. Sharma and R. Balasubramanian • Neurocomputing (Elsevier), vol 671, 132689, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
+      <section class="card section">
+        <h2>Authored books</h2>
+        <ul class="clean">
+          <li class="item">
+            <b><a href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Deep Learning Through the Prism of Tensors</a></b>
+            <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 610 pages • 2024 • ISBN: 978-981-97-8018-1</div>
+            <div class="links">
+              <a class="chiplink" href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
 
-        <li class="item">
-          <b><a href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">Brain-Lateralized Reservoirs: Neuro-Anatomically Constrained Echo State Networks for Chaotic and Physiological Signals</a></b>
-          <div class="meta">P. Singh, S. R. Dahale, Y. Tanwar, S. Gupta and R. Balasubramanian • Knowledge-Based Systems (Elsevier), vol 331, 114735, 2025 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
+          <li class="item">
+            <b><a href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">The Geometry of Intelligence: Foundations of Transformer Networks in Deep Learning</a></b>
+            <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 375 pages • 2025 • ISBN: 978-981-96-4705-7</div>
+            <div class="links">
+              <a class="chiplink" href="https://link.springer.com/book/9789819647057" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
 
-        <li class="item">
-          <b><a href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Geometry-Aware Reservoirs: Patch-Wise Jacobian Lifting with Cross-Patch Couplings for Piecewise-Linear Modeling of Chaotic Flows</a></b>
-          <div class="meta">P. Singh, Hrishit B. P. and R. Balasubramanian • Chaos, Solitons & Fractals (Elsevier), vol 200(3), 117160, 2025 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
+          <li class="item">
+            <b><a href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Artificial Intelligence and Machine Learning</a></b>
+            <div class="meta">P. Singh, T. K. Gandhi and R. Balasubramanian • McGraw Hill India • 584 pages • 2025 • ISBN: 978-936-44-4082-0</div>
+            <div class="links">
+              <a class="chiplink" href="https://www.mheducation.co.in/artificial-intelligence-and-machine-learning-9789364440820-india#tab-label-product-description-title" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
 
-        <li class="item">
-          <b><a href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">Hodge-Projected Echo-State Networks with Topologically Anchored Memory for Chaotic Flows</a></b>
-          <div class="meta">P. Singh, O. R. Madare and R. Balasubramanian • Chaos, Solitons & Fractals (Elsevier), vol 202(1), 117460, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">Thalamocortical Burst Gating Enables Event-Locked Memory</a></b>
-          <div class="meta">P. Singh and R. Balasubramanian • Knowledge-Based Systems (Elsevier), vol 333, 114947, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">Phase-Modulated Permutation Reservoirs for Robust Biomedical Time-Series Forecasting</a></b>
-          <div class="meta">P. Singh, S. Agrawal and R. Balasubramanian • Biomedical Signal Processing and Control (Elsevier), vol 116, 109460, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Hierarchical Fractal Reservoirs: Unsupervised Multiscale Symbolic Graphs for Long-Horizon Prediction of Chaotic Flows</a></b>
-          <div class="meta">P. Singh, S. Agrawal, S. R. Dahale, S. Ghosh and R. Balasubramanian • Neurocomputing (Elsevier), 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Symbolic Ordinal Partition Reservoirs for Model-Free Forecasting of Chaotic Flows</a></b>
-          <div class="meta">P. Singh, Hrishit B. P., S. Ghosh, A. Kumar and R. Balasubramanian • IEEE Transactions on Emerging Topics in Computational Intelligence, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">A Biologically Grounded Reservoir with Provable Dynamics and Slot-Based Working Memory</a></b>
-          <div class="meta">P. Singh, I. Jain and R. Balasubramanian • IEEE Transactions on Cognitive and Developmental Systems, 2026 • Q1</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">HypER: Hyperbolic Echo State Networks for Capturing Stretch-and-Fold Dynamics in Chaotic Flows</a></b>
-          <div class="meta">P. Singh, S. Ghosh, A. Kumar, Hrishit B. P. and R. Balasubramanian • ECAI 2025 (Bologna, Italy; Oct 25–30), pp. 3186–3193 • Oral • CORE A / ERA A</div>
-          <div class="links">
-            <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
-
-        <li class="item">
-          <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Frozen in Time: Parameter-Efficient Time Series Transformers via Reservoir-Induced Feature Expansion and Fixed Random Dynamics</a></b>
-          <div class="meta">P. Singh, M. Sharma, A. Dey and R. Balasubramanian • ECAI 2025 (Bologna, Italy; Oct 25–30), pp. 2283–2290 • Oral • CORE A / ERA A</div>
-          <div class="links">
-            <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Publisher</a>
-          </div>
-        </li>
-      </ul>
+          <li class="item">
+            <b><a href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Python for Mathematical Thinking</a></b>
+            <div class="meta">P. Singh and R. Balasubramanian • Springer Nature Singapore • 491 pages • 2026 • ISBN: 978-981-95-4079-2</div>
+            <div class="links">
+              <a class="chiplink" href="https://link.springer.com/book/9789819540792" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+        </ul>
+      </section>
     </section>
 
-    <!-- RESOURCES -->
-    <section class="card section" id="resources">
-      <h2>Resources</h2>
-      <p>Curated links to documents, publication lists, and academic materials.</p>
-      <div class="grid two" style="margin-top:10px;">
-        <div class="item">
-          <b>Documents</b>
-          <div class="meta">Slides, manuscripts, supplementary material, and related resources.</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Open Google Drive folder</a>
-          </div>
-        </div>
-
-        <div class="item">
-          <b>Publications (full)</b>
-          <div class="meta">Complete publication list (PDF).</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/file/d/1MH9fBGe12Me9x_B-RLjzET-OrBUZmP-F/view" target="_blank" rel="noopener">Open PDF</a>
-          </div>
-        </div>
-
-        <div class="item">
-          <b>Detailed CV</b>
-          <div class="meta">Full academic CV (PDF).</div>
-          <div class="links">
-            <a class="chiplink" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener">Open PDF</a>
-          </div>
-        </div>
-
-        <div class="item">
-          <b>Online profiles</b>
-          <div class="meta">Homepage, lab site, ORCID, LinkedIn, GitHub.</div>
-          <div class="links">
-            <a class="chiplink" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener">Homepage</a>
-            <a class="chiplink" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener">Lab</a>
-            <a class="chiplink" href="https://orcid.org/0000-0002-5372-3355" target="_blank" rel="noopener">ORCID</a>
-            <a class="chiplink" href="https://www.linkedin.com/in/psiitd/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="chiplink" href="https://github.com/deepdyn" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
+    <!-- PUBLICATIONS (distinct wrap + special background) -->
+    <section class="section-wrap pub" id="publications">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Publications</div>
+        <div class="hint">selected papers</div>
       </div>
+
+      <section class="card section">
+        <h2>Representative publications</h2>
+        <p>
+          Selected works spanning equivariant learning, neuro-inspired reservoirs, geometry-aware modeling and topological memory.
+          For the complete list, see <a href="https://drive.google.com/file/d/1MH9fBGe12Me9x_B-RLjzET-OrBUZmP-F/view" target="_blank" rel="noopener"><b>Publications (full)</b></a>.
+        </p>
+
+        <ul class="clean">
+          <li class="item">
+            <b><a href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">Adaptive Group-Weighted Convolutions: Enhancing Equivariant Networks via Learnable Symmetry Importance Maps</a></b>
+            <div class="meta">P. Singh, K. Sharma and R. Balasubramanian • Neurocomputing (Elsevier), vol 671, 132689, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://doi.org/10.1016/j.neucom.2026.132689" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">Brain-Lateralized Reservoirs: Neuro-Anatomically Constrained Echo State Networks for Chaotic and Physiological Signals</a></b>
+            <div class="meta">P. Singh, S. R. Dahale, Y. Tanwar, S. Gupta and R. Balasubramanian • Knowledge-Based Systems, vol 331, 114735, 2025 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114735" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Geometry-Aware Reservoirs: Patch-Wise Jacobian Lifting with Cross-Patch Couplings for Piecewise-Linear Modeling of Chaotic Flows</a></b>
+            <div class="meta">P. Singh, Hrishit B. P. and R. Balasubramanian • Chaos, Solitons & Fractals, vol 200(3), 117160, 2025 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://www.sciencedirect.com/science/article/pii/S0960077925011737?via%3Dihub" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">Hodge-Projected Echo-State Networks with Topologically Anchored Memory for Chaotic Flows</a></b>
+            <div class="meta">P. Singh, O. R. Madare and R. Balasubramanian • Chaos, Solitons & Fractals, vol 202(1), 117460, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://doi.org/10.1016/j.chaos.2025.117460" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">Thalamocortical Burst Gating Enables Event-Locked Memory</a></b>
+            <div class="meta">P. Singh and R. Balasubramanian • Knowledge-Based Systems, vol 333, 114947, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://doi.org/10.1016/j.knosys.2025.114947" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">Phase-Modulated Permutation Reservoirs for Robust Biomedical Time-Series Forecasting</a></b>
+            <div class="meta">P. Singh, S. Agrawal and R. Balasubramanian • Biomedical Signal Processing and Control, vol 116, 109460, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://doi.org/10.1016/j.bspc.2026.109460" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Hierarchical Fractal Reservoirs: Unsupervised Multiscale Symbolic Graphs for Long-Horizon Prediction of Chaotic Flows</a></b>
+            <div class="meta">P. Singh, S. Agrawal, S. R. Dahale, S. Ghosh and R. Balasubramanian • Neurocomputing, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Symbolic Ordinal Partition Reservoirs for Model-Free Forecasting of Chaotic Flows</a></b>
+            <div class="meta">P. Singh, Hrishit B. P., S. Ghosh, A. Kumar and R. Balasubramanian • IEEE T-ETCI, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">A Biologically Grounded Reservoir with Provable Dynamics and Slot-Based Working Memory</a></b>
+            <div class="meta">P. Singh, I. Jain and R. Balasubramanian • IEEE T-CDS, 2026 • Q1</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">HypER: Hyperbolic Echo State Networks for Capturing Stretch-and-Fold Dynamics in Chaotic Flows</a></b>
+            <div class="meta">P. Singh, S. Ghosh, A. Kumar, Hrishit B. P. and R. Balasubramanian • ECAI 2025 (Bologna; Oct 25–30), pp. 3186–3193 • Oral</div>
+            <div class="links">
+              <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251184" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+
+          <li class="item">
+            <b><a href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Frozen in Time: Parameter-Efficient Time Series Transformers via Reservoir-Induced Feature Expansion and Fixed Random Dynamics</a></b>
+            <div class="meta">P. Singh, M. Sharma, A. Dey and R. Balasubramanian • ECAI 2025 (Bologna; Oct 25–30), pp. 2283–2290 • Oral</div>
+            <div class="links">
+              <a class="chiplink" href="https://ebooks.iospress.nl/doi/10.3233/FAIA251071" target="_blank" rel="noopener">Publisher</a>
+            </div>
+          </li>
+        </ul>
+      </section>
     </section>
 
-    <!-- CONTACT -->
-    <section class="card section" id="contact">
-      <h2>Contact</h2>
-      <p>
-        Collaborations are welcome—especially on neuro-inspired learning, geometric representations,
-        dynamical systems, and reservoir computing.
-      </p>
-      <div class="actions" style="margin-top:10px;">
-        <a class="btn primary" href="mailto:spradeep@iiitsurat.ac.in"><b>Email</b> <span class="tag">spradeep@iiitsurat.ac.in</span></a>
-        <a class="btn" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener"><b>Lab</b></a>
-        <a class="btn" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener"><b>Homepage</b></a>
-        <a class="btn" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener"><b>Detailed CV (PDF)</b></a>
+    <!-- RESOURCES (distinct wrap) -->
+    <section class="section-wrap resources" id="resources">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Resources</div>
+        <div class="hint">documents & profiles</div>
       </div>
+
+      <section class="card section">
+        <h2>Resources</h2>
+        <p>Curated links to documents, publication lists, and academic materials.</p>
+
+        <div class="grid two" style="margin-top:10px;">
+          <div class="item">
+            <b>Documents</b>
+            <div class="meta">Slides, manuscripts, supplementary material, and related resources.</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/drive/u/0/folders/1_A042CW2jvxieX1LlaILB3m4efbC0fyT" target="_blank" rel="noopener">Google Drive folder</a>
+            </div>
+          </div>
+
+          <div class="item">
+            <b>Publications (full)</b>
+            <div class="meta">Complete publication list (PDF).</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/file/d/1MH9fBGe12Me9x_B-RLjzET-OrBUZmP-F/view" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+          </div>
+
+          <div class="item">
+            <b>Detailed CV</b>
+            <div class="meta">Full academic CV (PDF).</div>
+            <div class="links">
+              <a class="chiplink" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+          </div>
+
+          <div class="item">
+            <b>Online profiles</b>
+            <div class="meta">Homepage, lab site, ORCID, LinkedIn, GitHub.</div>
+            <div class="links">
+              <a class="chiplink" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener">Homepage</a>
+              <a class="chiplink" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener">Lab</a>
+              <a class="chiplink" href="https://orcid.org/0000-0002-5372-3355" target="_blank" rel="noopener">ORCID</a>
+              <a class="chiplink" href="https://www.linkedin.com/in/psiitd/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="chiplink" href="https://github.com/deepdynamicsai" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- CONTACT (distinct wrap) -->
+    <section class="section-wrap contact" id="contact">
+      <div class="sec-head">
+        <div class="title"><span class="dot" aria-hidden="true"></span> Contact</div>
+        <div class="hint">collaborate & connect</div>
+      </div>
+
+      <section class="card section">
+        <h2>Contact</h2>
+        <p>
+          Collaborations are welcome—especially on neuro-inspired learning, geometric representations,
+          dynamical systems, and reservoir computing.
+        </p>
+
+        <div class="actions" style="margin-top:10px;">
+          <a class="btn primary" href="mailto:spradeep@iiitsurat.ac.in"><b>Email</b> <span class="tag">spradeep@iiitsurat.ac.in</span></a>
+          <a class="btn" href="https://deepdynamicsai.github.io/" target="_blank" rel="noopener"><b>Lab</b></a>
+          <a class="btn" href="https://pradeepiitd.github.io/" target="_blank" rel="noopener"><b>Homepage</b></a>
+          <a class="btn" href="https://drive.google.com/file/d/1ygMI42JPWckaMPvj8bnyHL1bq5O3bS6b/view" target="_blank" rel="noopener"><b>Detailed CV (PDF)</b></a>
+        </div>
+      </section>
     </section>
 
     <footer>
-      <div>
-        <span class="quiet">©</span> <span id="y"></span> <span class="quiet">DeepDynamics</span> 
-      </div>
+      <div><span class="quiet">©</span> <span id="y"></span> <span class="quiet">DeepDynamics Lab</span></div>
       <div class="right">
         <a class="chiplink" href="#about">Top</a>
         <a class="chiplink" href="#books">Books</a>
