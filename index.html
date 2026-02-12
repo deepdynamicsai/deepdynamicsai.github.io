@@ -494,6 +494,43 @@
       .btn, .chiplink{ transition:none; }
       .btn:hover, .chiplink:hover{ transform:none; }
     }
+
+
+    /* Sidebar section header (same visual language as sec-head, but compact) */
+.aside-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  margin: 0 0 10px;
+}
+
+.aside-head .title{
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.aside-head .hint{
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.dot.small{
+  width: 7px;
+  height: 7px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--a) 10%, transparent);
+}
+
   </style>
 </head>
 
@@ -579,35 +616,44 @@
       </div>
 
       <aside class="card soft">
-        <div class="section">
-          <h2>Research philosophy</h2>
-          <p>
-            Modern ML becomes more reliable when it respects the structure of the world: dynamics, geometry, and biology.
-            DeepDynamics emphasizes <b>principled inductive biases</b>—neuro-anatomical constraints, symmetry, hyperbolic structure,
-            and topological memory—to improve robustness, interpretability, and long-horizon behavior.
-          </p>
-        </div>
+  <div class="section">
+    <div class="aside-head">
+      <div class="title"><span class="dot small" aria-hidden="true"></span> Research philosophy</div>
+      <div class="hint">principles</div>
+    </div>
 
-        <div class="rule"></div>
+    <p>
+      Modern ML becomes more reliable when it respects the structure of the world: dynamics, geometry, and biology.
+      DeepDynamics emphasizes <b>principled inductive biases</b>—neuro-anatomical constraints, symmetry, hyperbolic structure,
+      and topological memory—to improve robustness, interpretability, and long-horizon behavior.
+    </p>
+  </div>
 
-        <div class="section">
-          <h2>Focus areas</h2>
-          <ul class="clean">
-            <li class="item">
-              <b>Neuro-inspired reservoirs</b>
-              <div class="meta">Brain-lateralization, thalamocortical burst gating, event-locked memory mechanisms.</div>
-            </li>
-            <li class="item">
-              <b>Geometry-aware learning</b>
-              <div class="meta">Hyperbolic representations, equivariant design, and learnable symmetry importance.</div>
-            </li>
-            <li class="item">
-              <b>Dynamics-first time-series</b>
-              <div class="meta">Chaotic forecasting, operator viewpoints, and robust biomedical prediction.</div>
-            </li>
-          </ul>
-        </div>
-      </aside>
+  <div class="rule"></div>
+
+  <div class="section">
+    <div class="aside-head">
+      <div class="title"><span class="dot small" aria-hidden="true"></span> Focus areas</div>
+      <div class="hint">themes</div>
+    </div>
+
+    <ul class="clean">
+      <li class="item">
+        <b>Neuro-inspired reservoirs</b>
+        <div class="meta">Brain-lateralization, thalamocortical burst gating, event-locked memory mechanisms.</div>
+      </li>
+      <li class="item">
+        <b>Geometry-aware learning</b>
+        <div class="meta">Hyperbolic representations, equivariant design, and learnable symmetry importance.</div>
+      </li>
+      <li class="item">
+        <b>Dynamics-first time-series</b>
+        <div class="meta">Chaotic forecasting, operator viewpoints, and robust biomedical prediction.</div>
+      </li>
+    </ul>
+  </div>
+</aside>
+
     </section>
 
    
