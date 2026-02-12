@@ -12,6 +12,7 @@
 
   <style>
     :root{
+      /* Professional palette: deep navy + teal + periwinkle */
       --bg: #070a12;
       --panel: rgba(255,255,255,0.06);
       --panel2: rgba(255,255,255,0.045);
@@ -107,7 +108,7 @@
       color: var(--soft);
     }
 
-    /* Layout / Cards */
+    /* Cards / layout */
     .grid{ display:grid; gap: 16px; }
     .hero{ grid-template-columns: 1.35fr .85fr; align-items: stretch; }
     @media (max-width: 920px){ .hero{ grid-template-columns: 1fr; } }
@@ -126,7 +127,7 @@
       box-shadow: none;
     }
 
-    /* Section distinction wrappers */
+    /* ---------- SECTION DISTINCTION LAYER ---------- */
     .section-wrap{
       margin-top: 18px;
       border-radius: calc(var(--r) + 6px);
@@ -159,6 +160,7 @@
     }
     .section-wrap > *{ position: relative; z-index: 1; }
 
+    /* Accent variants per section (publications, contact, etc.) */
     .section-wrap.pub{
       background:
         radial-gradient(1200px 240px at 25% 0%,
@@ -209,6 +211,7 @@
       border-color: color-mix(in srgb, var(--a) 20%, var(--line));
     }
 
+    /* Optional: Section header ribbon inside each wrap */
     .sec-head{
       display:flex; align-items:center; justify-content:space-between;
       gap: 12px;
@@ -231,6 +234,7 @@
       white-space: nowrap;
     }
 
+    /* Kicker / Dot */
     .kicker{
       font-size: 12px;
       letter-spacing: .18em;
@@ -244,6 +248,7 @@
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--a) 12%, transparent);
     }
 
+    /* Text */
     .subtitle{
       margin: 0 0 16px;
       color: var(--soft);
@@ -256,6 +261,7 @@
       font-size: 15px;
     }
 
+    /* Buttons */
     .actions{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .btn{
       display:inline-flex; align-items:center; gap: 10px;
@@ -288,6 +294,7 @@
       color: var(--muted);
     }
 
+    /* Pills */
     .pillrow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
     .pill{
       font-size: 12px;
@@ -298,6 +305,7 @@
       border-radius: 999px;
     }
 
+    /* Sections */
     .section{ margin-top: 16px; }
     .section h2{
       margin: 0 0 10px;
@@ -306,9 +314,11 @@
     }
     .section p{ margin: 0 0 10px; color: var(--muted); }
 
+    /* Two-column grid */
     .two{ grid-template-columns: 1fr 1fr; }
     @media (max-width: 920px){ .two{ grid-template-columns: 1fr; } }
 
+    /* Lists */
     ul.clean{ list-style: none; padding: 0; margin: 0; display:grid; gap: 10px; }
     .item{
       border: 1px solid var(--line);
@@ -499,7 +509,7 @@
       </div>
       <nav>
         <a href="#about">About</a>
-        <a href="#philosophy">Research</a>
+        <a href="#research">Research</a>
         <a href="#inspirations">Inspirations</a>
         <a href="#books">Books</a>
         <a href="#publications">Publications</a>
@@ -518,7 +528,7 @@
           <span class="fade2"> learning</span>
           <span class="via"> via</span>
           <span class="dynamics"> dynamics</span><span class="fade2">.</span>
- 
+    
         </h1>
 
         <p class="subtitle">
@@ -568,8 +578,7 @@
         </div>
       </div>
 
-      <!-- MERGED: research philosophy + themes -->
-      <aside class="card soft" id="philosophy">
+      <aside class="card soft">
         <div class="section">
           <h2>Research philosophy</h2>
           <p>
@@ -577,32 +586,12 @@
             DeepDynamics emphasizes <b>principled inductive biases</b>—neuro-anatomical constraints, symmetry, hyperbolic structure,
             and topological memory—to improve robustness, interpretability, and long-horizon behavior.
           </p>
-
-          <!-- Integrated "themes/directions" (formerly separate section) -->
-          <div class="grid two" style="margin-top:12px;">
-            <div class="item">
-              <b>Neuro-anatomically constrained computation</b>
-              <div class="meta">Cortical asymmetry and thalamocortical gating as architectural priors for memory and control.</div>
-            </div>
-            <div class="item">
-              <b>Topological and geometric memory</b>
-              <div class="meta">Hodge-anchored structure and geometry-aware couplings for stable long-horizon forecasting.</div>
-            </div>
-            <div class="item">
-              <b>Equivariance and symmetry importance</b>
-              <div class="meta">Learnable symmetry weighting to make inductive bias adaptive rather than fixed.</div>
-            </div>
-            <div class="item">
-              <b>Dynamics-first time-series intelligence</b>
-              <div class="meta">Robust prediction in chaotic and physiological signals with theory-guided evaluation.</div>
-            </div>
-          </div>
         </div>
 
         <div class="rule"></div>
 
         <div class="section">
-          <h2>Signature motifs</h2>
+          <h2>Focus areas</h2>
           <ul class="clean">
             <li class="item">
               <b>Neuro-inspired reservoirs</b>
@@ -613,15 +602,17 @@
               <div class="meta">Hyperbolic representations, equivariant design, and learnable symmetry importance.</div>
             </li>
             <li class="item">
-              <b>Stability-aware dynamics</b>
-              <div class="meta">Contractivity/stability views, topology-informed memory, and reproducible benchmarks.</div>
+              <b>Dynamics-first time-series</b>
+              <div class="meta">Chaotic forecasting, operator viewpoints, and robust biomedical prediction.</div>
             </li>
           </ul>
         </div>
       </aside>
     </section>
 
-    <!-- INSPIRATIONS -->
+   
+
+    <!-- INSPIRATIONS (distinct wrap) -->
     <section class="section-wrap inspo" id="inspirations">
       <div class="sec-head">
         <div class="title"><span class="dot" aria-hidden="true"></span> Inspirations</div>
@@ -629,7 +620,7 @@
       </div>
 
       <section class="card section">
-        <h2>Inspirations & related work</h2>
+        
         <p>
           Selected external ideas we admire—especially those that treat <b>time</b>, <b>neural dynamics</b>, and
           <b>biological structure</b> as first-class design principles for modern learning systems.
@@ -665,7 +656,7 @@
       </section>
     </section>
 
-    <!-- BOOKS -->
+    <!-- BOOKS (distinct wrap) -->
     <section class="section-wrap books" id="books">
       <div class="sec-head">
         <div class="title"><span class="dot" aria-hidden="true"></span> Books</div>
@@ -673,7 +664,7 @@
       </div>
 
       <section class="card section">
-        <h2>Authored books</h2>
+        
         <ul class="clean">
           <li class="item">
             <b><a href="https://link.springer.com/book/9789819780181" target="_blank" rel="noopener">Deep Learning Through the Prism of Tensors</a></b>
@@ -710,7 +701,7 @@
       </section>
     </section>
 
-    <!-- PUBLICATIONS -->
+    <!-- PUBLICATIONS (distinct wrap + special background) -->
     <section class="section-wrap pub" id="publications">
       <div class="sec-head">
         <div class="title"><span class="dot" aria-hidden="true"></span> Publications</div>
@@ -718,7 +709,7 @@
       </div>
 
       <section class="card section">
-        <h2>Representative publications</h2>
+        
         <p>
           Selected works spanning equivariant learning, neuro-inspired reservoirs, geometry-aware modeling and topological memory.
           For the complete list, see <a href="https://drive.google.com/file/d/1MH9fBGe12Me9x_B-RLjzET-OrBUZmP-F/view" target="_blank" rel="noopener"><b>Publications (full)</b></a>.
@@ -816,7 +807,7 @@
       </section>
     </section>
 
-    <!-- RESOURCES -->
+    <!-- RESOURCES (distinct wrap) -->
     <section class="section-wrap resources" id="resources">
       <div class="sec-head">
         <div class="title"><span class="dot" aria-hidden="true"></span> Resources</div>
@@ -824,7 +815,7 @@
       </div>
 
       <section class="card section">
-        <h2>Resources</h2>
+       
         <p>Curated links to documents, publication lists, and academic materials.</p>
 
         <div class="grid two" style="margin-top:10px;">
@@ -867,7 +858,7 @@
       </section>
     </section>
 
-    <!-- CONTACT -->
+    <!-- CONTACT (distinct wrap) -->
     <section class="section-wrap contact" id="contact">
       <div class="sec-head">
         <div class="title"><span class="dot" aria-hidden="true"></span> Contact</div>
@@ -875,7 +866,7 @@
       </div>
 
       <section class="card section">
-        <h2>Contact</h2>
+        
         <p>
           Collaborations are welcome—especially on neuro-inspired learning, geometric representations,
           dynamical systems, and reservoir computing.
