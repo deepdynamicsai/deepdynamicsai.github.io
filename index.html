@@ -558,6 +558,26 @@
   box-shadow: var(--shadow2);
 }
 
+    /* One place to control PI text size */
+.pi-strip{
+  --pi-fs: 13px;          /* increase/decrease as you like */
+}
+
+/* Keep same size for line1 and degrees */
+.pi-strip .line1{
+  font-size: var(--pi-fs) !important;
+}
+
+.pi-strip .pi-degrees .badge{
+  font-size: var(--pi-fs) !important;
+}
+
+/* (Optional) make the PI name slightly stronger without changing size */
+.pi-strip .line1 b{
+  font-weight: 850;
+}
+
+
 
   </style>
 </head>
