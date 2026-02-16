@@ -535,7 +535,7 @@
 .pi-strip{
   display: grid;
   grid-template-columns: 1fr 110px;   /* right column reserved for photo */
-  gap: 14px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -549,14 +549,11 @@
 
 /* photo */
 .pi-photo{
-  width: 130px;
-  height: 155px;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
   background: color-mix(in srgb, var(--panel2) 92%, transparent);
-  box-shadow: var(--shadow2);
 }
+
 
     /* One place to control PI text size */
 .pi-strip{
