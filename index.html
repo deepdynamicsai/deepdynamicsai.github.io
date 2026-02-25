@@ -631,6 +631,33 @@
     justify-self: start;           /* aligns nicely with text */
   }
 }
+
+    .section-wrap.teaching{
+  background:
+    radial-gradient(1200px 240px at 18% 0%,
+      color-mix(in srgb, var(--b) 14%, transparent),
+      transparent 64%),
+    radial-gradient(1200px 240px at 88% 100%,
+      color-mix(in srgb, var(--a) 10%, transparent),
+      transparent 64%),
+    color-mix(in srgb, var(--panel2) 86%, transparent);
+  border-color: color-mix(in srgb, var(--b) 22%, var(--line));
+}
+
+/* Small course code chip */
+.coursecode{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--soft);
+  white-space: nowrap;
+}
   </style>
 </head>
 
@@ -650,6 +677,7 @@
         <a href="#inspirations">Inspirations</a>
         <a href="#books">Books</a>
         <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
         <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -956,6 +984,49 @@
         </ul>
       </section>
     </section>
+
+
+
+<!-- TEACHING (distinct wrap) -->
+<section class="section-wrap teaching" id="teaching">
+  <div class="sec-head">
+    <div class="title"><span class="dot" aria-hidden="true"></span> Teaching</div>
+    <div class="hint">courses & lecture notes</div>
+  </div>
+
+  <section class="card section">
+    <p>
+      Active courses and lecture material.
+    </p>
+
+    <ul class="clean">
+      <li class="item">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <b>Deep Learning and Generative AI</b>
+          <span class="coursecode">CS 922</span>
+        </div>
+
+        <div class="meta">
+          Lecture notes and course material.
+        </div>
+
+        <div class="links">
+          <a class="chiplink"
+             href="https://drive.google.com/file/d/1PxMNBRPj-YBZB2QaYZbcoriSpXrHaLJL/view?usp=sharing"
+             target="_blank" rel="noopener">
+            Lec 1
+          </a>
+        
+         <a class="chiplink" href="YOUR_LEC2_LINK" target="_blank" rel="noopener">Lec 2</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+</section>
+
+
+
+    
 
     <!-- RESOURCES (distinct wrap) -->
     <section class="section-wrap resources" id="resources">
