@@ -593,7 +593,44 @@
 }
 
 
+/* PI strip layout */
+.pi-strip{
+  display:grid;
+  grid-template-columns: 1fr 130px;
+  gap: 14px;
+  align-items: center;
+}
 
+/* keep degrees compact */
+.pi-degrees{ justify-items: start; }
+.pi-degrees .badge{ width: fit-content; max-width: 100%; }
+
+/* photo default (desktop / landscape) */
+.pi-photo{
+  width: 130px;
+  height: 155px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+  object-position: center 12%;
+  background: color-mix(in srgb, var(--panel2) 92%, transparent);
+  box-shadow: var(--shadow2);
+  margin-left: -38px;  /* your ~1cm left shift for wide screens */
+}
+
+/* iPhone portrait / narrow screens: stack + remove overlap */
+@media (max-width: 520px){
+  .pi-strip{
+    grid-template-columns: 1fr;     /* stack */
+    gap: 12px;
+  }
+  .pi-photo{
+    margin-left: 0;                /* IMPORTANT: remove negative shift */
+    width: 120px;
+    height: 140px;
+    justify-self: start;           /* aligns nicely with text */
+  }
+}
   </style>
 </head>
 
