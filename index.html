@@ -394,6 +394,54 @@
   }
   .dynamics{ opacity: .74; }
 
+    /* Interns strip inside PI block */
+.pi-interns{
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pi-interns .label{
+  font-size: 11.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.pi-interns .names{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+}
+
+.intern{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel2) 92%, transparent);
+  color: var(--soft);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.intern .inst{
+  color: var(--muted);
+}
+
+/* On very small screens, allow interns to wrap nicely */
+@media (max-width: 520px){
+  .intern{ white-space: normal; }
+}
+
   /* University highlight */
   .uni{
     display:inline-flex;
@@ -652,20 +700,31 @@
 
        <div class="pi-strip">
   <div class="pi-left">
-    <div class="line1">
-      Principal Investigator: <b>Dr. S. Pradeep</b>
-      <span class="uni iiit">IIIT Surat</span>
-    </div>
-
-    <div class="pi-degrees">
-      <span class="badge"><strong>PhD</strong><span>Symbolic Systems <span class="uni iit">IIT Delhi</span></span></span>
-      <span class="badge"><strong>MSc</strong><span>Mathematics <span class="uni iit">IIT Delhi</span></span></span>
-      <span class="badge"><strong>BS</strong><span>Data Science <span class="uni iit">IIT Madras</span></span></span>
-      <span class="badge"><strong>MTech</strong><span>AI &amp; ML <span class="uni iit">IIT Madras</span></span></span>
-    </div>
+  <div class="line1">
+    Principal Investigator: <b>Dr. S. Pradeep</b>
+    <span class="uni iiit">IIIT Surat</span>
   </div>
 
-  <img class="pi-photo" src="pradeep.png" alt="Dr. S. Pradeep" />
+  <div class="pi-degrees">
+    <span class="badge"><strong>PhD</strong><span>Symbolic Systems <span class="uni iit">IIT Delhi</span></span></span>
+    <span class="badge"><strong>MSc</strong><span>Mathematics <span class="uni iit">IIT Delhi</span></span></span>
+    <span class="badge"><strong>BS</strong><span>Data Science <span class="uni iit">IIT Madras</span></span></span>
+    <span class="badge"><strong>MTech</strong><span>AI &amp; ML <span class="uni iit">IIT Madras</span></span></span>
+  </div>
+
+  <div class="pi-interns">
+    <div class="label"><span class="dot small" aria-hidden="true"></span> Interns</div>
+    <div class="names">
+      <span class="intern">Shradhdha Agarwal <span class="inst">(IIT Roorkee)</span></span>
+      <span class="intern">Jahanvi <span class="inst">(IIT Roorkee)</span></span>
+      <span class="intern">Lavanya Sankaranarayanan <span class="inst">(University of Alberta)</span></span>
+      <span class="intern">Kartik Goyal <span class="inst">(IIT Roorkee)</span></span>
+      <span class="intern">Drishti Garg <span class="inst">(IIT Roorkee)</span></span>
+    </div>
+  </div>
+</div>
+
+<img class="pi-photo" src="pradeep.png" alt="Dr. S. Pradeep" />
 </div>
 
         
