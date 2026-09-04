@@ -410,3 +410,134 @@ main { padding-bottom: 34px; }
   height: 100%;
   object-fit: cover;
 }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.hero-copy {
+  max-width: 640px;
+}
+
+.hero h1 {
+  max-width: 12ch;
+}
+
+.hero .dek {
+  max-width: 590px;
+}
+
+
+/* =========================================================
+   HERO ART
+   ========================================================= */
+
+.hero-art {
+  margin: 0;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-art-frame {
+  position: relative;
+
+  width: 100%;
+  min-height: 430px;
+
+  aspect-ratio: 1.35 / 1;
+
+  overflow: hidden;
+
+  /*
+   * No border, shadow, or obvious card treatment.
+   * The artwork should visually merge into the page.
+   */
+  background: transparent;
+}
+
+.hero-art-image {
+  position: absolute;
+
+  width: 118%;
+  height: 118%;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  object-fit: cover;
+  object-position: center;
+
+  display: block;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-copy {
+    max-width: 700px;
+  }
+
+  .hero h1 {
+    max-width: 15ch;
+  }
+
+  .hero-art {
+    width: 100%;
+  }
+
+  .hero-art-frame {
+    min-height: 360px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero-art-image {
+    width: 112%;
+    height: 112%;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .hero {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    gap: 2.5rem;
+  }
+
+  .hero-art-frame {
+    min-height: 280px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-art-image {
+    width: 120%;
+    height: 120%;
+  }
+}
