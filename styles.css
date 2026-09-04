@@ -806,3 +806,170 @@ main { padding-bottom: 34px; }
   }
 
 }
+
+
+/* =========================================================
+   MOBILE — keep artwork behind the content
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .hero {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 610px;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+
+    overflow: hidden;
+  }
+
+
+  .hero-copy {
+    position: relative;
+
+    width: 100%;
+    max-width: 100%;
+
+    z-index: 1;
+  }
+
+
+  .hero h1 {
+    max-width: 14ch;
+  }
+
+
+  .hero .dek {
+    max-width: 34rem;
+  }
+
+
+  .hero .labline {
+    max-width: 32rem;
+  }
+
+
+  /*
+   * Keep art behind the text.
+   * It is deliberately much larger than the viewport so that
+   * the dynamical structure remains visually substantial.
+   */
+
+  .hero::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+
+    width: 175vw;
+    height: 115%;
+
+    transform: translate(-50%, -50%);
+
+    background-image: url("art.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    opacity: 0.58;
+
+    z-index: -2;
+
+    pointer-events: none;
+  }
+
+
+  /*
+   * Light veil for readability.
+   * The art remains visible everywhere, but text remains crisp.
+   */
+
+  .hero::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(250, 249, 246, 0.96) 0%,
+        rgba(250, 249, 246, 0.88) 32%,
+        rgba(250, 249, 246, 0.66) 58%,
+        rgba(250, 249, 246, 0.30) 82%,
+        rgba(250, 249, 246, 0.12) 100%
+      );
+
+    z-index: -1;
+
+    pointer-events: none;
+  }
+
+
+  .hero-links {
+    gap: 0.7rem 1.3rem;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .hero {
+    min-height: 590px;
+
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+
+  .hero::before {
+    width: 205vw;
+    height: 110%;
+
+    /*
+     * Slight shift to expose more of the interesting
+     * geometry on narrow portrait screens.
+     */
+    left: 56%;
+
+    opacity: 0.53;
+  }
+
+
+  .hero::after {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(250, 249, 246, 0.97) 0%,
+        rgba(250, 249, 246, 0.90) 36%,
+        rgba(250, 249, 246, 0.67) 64%,
+        rgba(250, 249, 246, 0.26) 100%
+      );
+  }
+
+
+  .hero h1 {
+    max-width: 13ch;
+  }
+
+
+  .hero-links {
+    gap: 0.65rem 1.15rem;
+  }
+
+}
